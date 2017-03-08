@@ -17,3 +17,40 @@ img {
     max-width: 100%;
     height: auto;
 }
+
+body
+{
+	background: #ffffff;
+}
+
+h5
+{
+	font-weight: 400;
+}
+
+.containerz
+{
+	margin-top: 40px;
+	width: 400px;
+	height: 700px;
+    position: absolute;
+    align-content: center;
+}
+
+.tabs .indicator
+{
+	background-color: #e0f2f1;
+	height: 60px;
+	opacity: 0.3;
+}
+
+.form-containerz
+{
+	padding: 40px;
+	padding-top: 10px;
+}
+
+.confirmation-tabs-btn
+{
+	position: absolute;
+}

@@ -10,30 +10,96 @@
   <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 </head>
+    <script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>
+  <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyBhoPjNeZvo62IrIfi7GHARENckSZaoXGk",
+        authDomain: "countrycart-b276a.firebaseapp.com",
+        databaseURL: "https://countrycart-b276a.firebaseio.com",
+        storageBucket: "countrycart-b276a.appspot.com",
+        messagingSenderId: "717738134028"
+      };
+      firebase.initializeApp(config);
+  </script>
 <body>
   <nav class="deep-purple lighten-1" role="navigation">
     <div class="nav-wrapper container" >       
-    <img class="logo center hide-on-med-and-down" src="images/strawberry-white.png" height="42" width="42" align="center" alt="logo">
+    <img class="logo center hide-on-med-and-down" src="images/whitearrows.png" height="42" width="42" align="center" alt="logo">
         <a id="logo-container" class="brand-logo"></a> 
 <!-- Icon made by Baianat from www.flaticon.com  -->
       <ul class="right hide-on-med-and-down">
         <li><a href="#"></a></li>
           <li class="tab col s3"><a href="index.html">Home</a></li>
           <li class="tab col s3"><a href="about.html">About</a></li>
-          <li class="tab col s3"><a href="#test3">Login</a></li>
+          <li class="tab col s3"><a id="sign-in" onclick="signout()"></a></li>
       </ul>
 
       <ul id="nav-mobile" class="side-nav" >
           <li class="tab col s3"><a href="index.html">Home</a></li>
           <li class="tab col s3"><a href="about.html">About</a></li>
-          <li class="tab col s3"><a href="#test3">Login</a></li>
+          <li class="tab col s3"><a id="sign-in"></a></li>
       </ul>
         <a href="#" data-activates="nav-mobile" class="button-collapse left"><i class="material-icons">menu</i></a>
     </div>
   </nav>
   <div class="section no-pad-bot" id="index-banner">
     <div class="container">
-
+        
+        <script type="text/javascript">
+      initApp = function() {
+        firebase.auth().onAuthStateChanged(function(user) {
+          if (user) {
+            // User is signed in.
+              var strMessage1 = document.getElementById("message") ;
+              strMessage1.innerHTML = '<h5> Hi, ' + user.displayName + '.</h5>'
+            var displayName = user.displayName;
+            var email = user.email;
+            var emailVerified = user.emailVerified;
+            var photoURL = user.photoURL;
+            var uid = user.uid;
+            var providerData = user.providerData;
+            user.getToken().then(function(accessToken) {
+              document.getElementById('sign-in-status').textContent = 'Signed in' ;
+              document.getElementById('sign-in').textContent = 'Sign out';
+              document.getElementById('account-details').textContent = JSON.stringify({
+                displayName: displayName,
+                email: email,
+                emailVerified: emailVerified,
+                photoURL: photoURL,
+                uid: uid,
+                accessToken: accessToken,
+                providerData: providerData
+              }, null, '  ');
+            });
+          } else {
+            // User is signed out.
+            document.getElementById('sign-in-status').textContent = 'viewing as Guest.';
+            document.getElementById('sign-in').textContent = 'Sign in';
+            document.getElementById('sign-in').href = "login.html"
+            document.getElementById('account-details').textContent = 'null';
+          }
+        }, function(error) {
+          console.log(error);
+        });
+      };
+      window.addEventListener('load', function() {
+        initApp()
+      });
+    
+        signout = function() {
+            firebase.auth().signOut().then(function() {
+            console.log('Signed Out');
+            }, function(error) {
+            console.error('Sign Out Error', error);
+            });
+        };
+    </script>
+    <h5 id='message'> </h5>
+    <p>You are currently <a id="sign-in-status"></a> </p>
+    
+    
+        
 <ul class="collection">
     <li class="collection-item avatar">
       <i class="material-icons circle red">play_arrow</i>
@@ -45,7 +111,11 @@
     </li>
   </ul>
             
-
+<br><br>
+        <br><br>
+        <br><br>
+        <br><br>      
+        <br><br>
 
               
               

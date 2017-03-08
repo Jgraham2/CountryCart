@@ -13,18 +13,16 @@
 <body>
   <nav class="deep-purple lighten-1" role="navigation">
     <div class="nav-wrapper container" >       
-    <img class="logo center hide-on-med-and-down" src="images/strawberry-white.png" height="42" width="42" align="center" alt="logo">
+    <img class="logo center hide-on-med-and-down" src="images/whitearrows.png" height="42" width="42" align="center" alt="logo">
         <a id="logo-container" class="brand-logo"></a> 
-<!-- Icon made by Baianat from www.flaticon.com  -->
+<!-- Icon a combination of icons made by madebyoliver from www.flaticon.com  -->
       <ul class="right hide-on-med-and-down">
         <li><a href="#"></a></li>
           <li class="tab col s3"><a href="about.html">About</a></li>
-          <li class="tab col s3"><a href="#test3">Login</a></li>
       </ul>
 
       <ul id="nav-mobile" class="side-nav" >
           <li class="tab col s3"><a href="about.html">About</a></li>
-          <li class="tab col s3"><a href="#test3">Login</a></li>
       </ul>
         <a href="#" data-activates="nav-mobile" class="button-collapse left"><i class="material-icons">menu</i></a>
     </div>
@@ -60,18 +58,47 @@
                     <div class="col s6 m4 l6"><p></p></div>
                 </div>
                 <div class="row center">
-                    <a href="" id="download-button" class="btn-large waves-effect waves-light  red lighten-1">Order Now</a>
+                    <a href="supplierView.html" id="download-button" class="btn-large waves-effect waves-light  red lighten-1">Order Now</a>
                 </div>
                 <br><br>
             </form>
         </div>
   </div>
+    <center>
+<script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>
+  <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyBhoPjNeZvo62IrIfi7GHARENckSZaoXGk",
+        authDomain: "countrycart-b276a.firebaseapp.com",
+        databaseURL: "https://countrycart-b276a.firebaseio.com",
+        storageBucket: "countrycart-b276a.appspot.com",
+        messagingSenderId: "717738134028"
+      };
+      firebase.initializeApp(config);
+  </script>
+    <script src="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.css" />
+    <script type="text/javascript">
+      // FirebaseUI config.
+      var uiConfig = {
+        signInSuccessUrl: 'supplierView.html',
+        signInOptions: [
+          // Leave the lines as is for the providers you want to offer your users.
+          firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+          firebase.auth.EmailAuthProvider.PROVIDER_ID
+        ],
+        // Terms of service url.
+        tosUrl: '<your-tos-url>'
+      };
 
-    <br><br>
-
-    <div class="section">
-
-    </div>
+      // Initialize the FirebaseUI Widget using Firebase.
+      var ui = new firebaseui.auth.AuthUI(firebase.auth());
+      // The start method will wait until the DOM is loaded.
+      ui.start('#firebaseui-auth-container', uiConfig);
+    </script>
+        <div id="firebaseui-auth-container"></div>
+<br>
 
 
   <footer class="page-footer light-green darken-1">

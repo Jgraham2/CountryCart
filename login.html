@@ -13,81 +13,179 @@
 <body>
   <nav class="deep-purple lighten-1" role="navigation">
     <div class="nav-wrapper container" >       
-    <img class="logo center hide-on-med-and-down" src="images/strawberry-white.png" height="42" width="42" align="center" alt="logo">
+    <img class="logo center hide-on-med-and-down" src="images/whitearrows.png" height="42" width="42" align="center" alt="logo">
         <a id="logo-container" class="brand-logo"></a> 
 <!-- Icon made by Baianat from www.flaticon.com  -->
       <ul class="right hide-on-med-and-down">
         <li><a href="#"></a></li>
           <li class="tab col s3"><a href="index.html">Home</a></li>
           <li class="tab col s3"><a href="about.html">About</a></li>
-          <li class="tab col s3"><a href="#test3">Login</a></li>
       </ul>
 
       <ul id="nav-mobile" class="side-nav" >
           <li class="tab col s3"><a href="index.html">Home</a></li>
           <li class="tab col s3"><a href="about.html">About</a></li>
-          <li class="tab col s3"><a href="#test3">Login</a></li>
       </ul>
         <a href="#" data-activates="nav-mobile" class="button-collapse left"><i class="material-icons">menu</i></a>
     </div>
   </nav>
+    
   <div class="section no-pad-bot" id="index-banner">
-    <div class="container">
-      <main>
+   
     <center>
-      <div class="section"></div>
+        <h4 class="">Hi Again,</h4>
+        <h5 class="">Would you like to Sign In?</h5>
+<script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>
+  <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyBhoPjNeZvo62IrIfi7GHARENckSZaoXGk",
+        authDomain: "countrycart-b276a.firebaseapp.com",
+        databaseURL: "https://countrycart-b276a.firebaseio.com",
+        storageBucket: "countrycart-b276a.appspot.com",
+        messagingSenderId: "717738134028"
+      };
+      firebase.initializeApp(config);
+  </script>
+    <script src="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.css" />
+    <script type="text/javascript">
+      // FirebaseUI config.
+      var uiConfig = {
+        signInSuccessUrl: 'supplierView.html',
+        signInOptions: [
+          // Leave the lines as is for the providers you want to offer your users.
+          firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+          firebase.auth.EmailAuthProvider.PROVIDER_ID
+        ],
+        // Terms of service url.
+        tosUrl: '<your-tos-url>'
+      };
 
-      <h5 class="green-text">Please, login into your account</h5>
-      <div class="section"></div>
-
-      <div class="container">
-        <div class="z-depth-1 grey lighten-4 row" style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
-
-          <form class="col s12" method="post">
-            <div class='row'>
-              <div class='col s12'>
-              </div>
-            </div>
-
-            <div class='row'>
-              <div class='input-field col s12'>
-                <input class='validate' type='email' name='email' id='email' />
-                <label for='email'>Enter your email</label>
-              </div>
-            </div>
-
-            <div class='row'>
-              <div class='input-field col s12'>
-                <input class='validate' type='password' name='password' id='password' />
-                <label for='password'>Enter your password</label>
-              </div>
-              <label style='float: right;'>
-								<a class='purple-text' href='#!'><b>Forgot Password?</b></a>
-							</label>
-            </div>
-
-            <br />
-            <center>
-              <div class='row'>
-                <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect red lighten-1'>Login</button>
-              </div>
-            </center>
-          </form>
-        </div>
-      </div>
-      <a href="#!">Create account</a>
+      // Initialize the FirebaseUI Widget using Firebase.
+      var ui = new firebaseui.auth.AuthUI(firebase.auth());
+      // The start method will wait until the DOM is loaded.
+      ui.start('#firebaseui-auth-container', uiConfig);
+    </script>
+         <br><br>
+         <br><br>
+        <div id="firebaseui-auth-container"></div>
+        <div class="container">
+              <br>
+ <!--<div class="container  z-depth-4">
+	<ul class="tabs red lighten-1">
+		<li class="tab col s3"><a class="white-text active" href="#login">login</a></li>
+		<li class="tab col s3"><a class="white-text" href="#register">register</a></li>
+	</ul>
+            
+	<div id="login" class="col s12">
+		<form class="col s12">
+			<div class="form-containerz">
+				<h3 class="red-text">Sign In</h3>
+				<div class="row">
+					<div class="input-field col s12">
+						<input id="email" type="email" class="validate">
+						<label for="email" style="text-align: left;">Email</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s12">
+						<input id="password" type="password" class="validate">
+						<label for="password" style="text-align: left;">Password</label>
+					</div>
+				</div>
+				<br>
+				<center>
+					<button class="btn waves-effect waves-light red lighten-1" type="submit" name="action">Log In</button>
+					<br>
+					<br>
+					<a href="">Forgotten password?</a>
+                    
+                    
+				</center>
+                
+			</div>
+		</form>
+	</div>
+	<div id="register" class="col s12">
+		<form class="col s12">
+			<div class="form-containerz">
+				<h3 class="red-text">Let's get you set up.</h3>
+				<div class="row">
+					<div class="input-field col s12">
+						<input id="first_name" type="text" class="validate">
+						<label for="first_name" style="text-align: left;">First Name</label>
+					</div>
+                </div>
+                <div class="row">
+					<div class="input-field col s12">
+						<input id="last_name" type="text" class="validate">
+						<label for="last_name" style="text-align: left;">Last Name</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s12">
+						<input id="email" type="email" class="validate">
+						<label for="email" style="text-align: left;">Email</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s12">
+						<input id="email-confirm" type="email" class="validate">
+						<label for="email-confirm" style="text-align: left;">Email Confirmation</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s12">
+						<input id="password" type="password" class="validate">
+						<label for="password" style="text-align: left;">Password</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s12">
+						<input id="password-confirm" type="password" class="validate">
+						<label for="password-confirm" style="text-align: left;">Password Confirmation</label>
+					</div>
+				</div>
+                <div class="row">
+                <div class="input-field col s5">
+						<input id="postcode" type="text" class="validate">
+						<label for="postcode" style="text-align: left;">House No.</label>
+					</div>
+                </div>
+                <div class="row">
+                <div class="input-field col s12">
+						<input id="postcode" type="text" class="validate">
+						<label for="postcode" style="text-align: left;">Address</label>
+					</div>
+                </div>
+                <div class="row">
+                <div class="input-field col s12">
+						<input id="postcode" type="text" class="validate">
+						<label for="postcode" style="text-align: left;">Town</label>
+					</div>
+                </div>
+                <div class="row">
+                <div class="input-field col s12">
+						<input id="postcode" type="text" class="validate">
+						<label for="postcode" style="text-align: left;">Postcode</label>
+					</div>
+                </div>
+				<center>
+					<button class="btn waves-effect waves-light red lighten-1" type="submit" name="action">Submit</button>
+				</center>
+			</div>
+		</form>
+	</div>
+</div>       -->
+       </div> 
     </center>
-
-    <div class="section"></div>
-    <div class="section"></div>
-  </main>
       
         
-        </div>
   </div>
 
     <br><br>
-
+ <br><br>
     <div class="section">
 
     </div>
@@ -104,7 +202,9 @@
   </footer>
 
 
-  <!--  Scripts-->
+    
+  <!-- Scripts-->
+    
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="js/materialize.js"></script>
   <script src="js/init.js"></script>
