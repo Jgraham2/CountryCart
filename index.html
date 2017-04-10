@@ -4,12 +4,27 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
   <title>CountryCart</title>
-
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="js/materialize.js"></script>
+  <script src="js/init.js"></script>
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 </head>
+    <script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>
+  <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyBhoPjNeZvo62IrIfi7GHARENckSZaoXGk",
+        authDomain: "countrycart-b276a.firebaseapp.com",
+        databaseURL: "https://countrycart-b276a.firebaseio.com",
+        storageBucket: "countrycart-b276a.appspot.com",
+        messagingSenderId: "717738134028"
+      };
+      firebase.initializeApp(config);
+  </script>
 <body>
   <nav class="deep-purple lighten-1" role="navigation">
     <div class="nav-wrapper container" >       
@@ -19,10 +34,12 @@
       <ul class="right hide-on-med-and-down">
         <li><a href="#"></a></li>
           <li class="tab col s3"><a href="about.html">About</a></li>
+          <li class="tab col s3"><a id="sign-in" onclick="signout()"></a></li>
       </ul>
 
       <ul id="nav-mobile" class="side-nav" >
           <li class="tab col s3"><a href="about.html">About</a></li>
+          <li class="tab col s3"><a id="sign-in" onclick="signout()"></a></li>
       </ul>
         <a href="#" data-activates="nav-mobile" class="button-collapse left"><i class="material-icons">menu</i></a>
     </div>
@@ -65,18 +82,6 @@
         </div>
   </div>
     <center>
-<script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>
-  <script>
-      // Initialize Firebase
-      var config = {
-        apiKey: "AIzaSyBhoPjNeZvo62IrIfi7GHARENckSZaoXGk",
-        authDomain: "countrycart-b276a.firebaseapp.com",
-        databaseURL: "https://countrycart-b276a.firebaseio.com",
-        storageBucket: "countrycart-b276a.appspot.com",
-        messagingSenderId: "717738134028"
-      };
-      firebase.initializeApp(config);
-  </script>
     <script src="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.js"></script>
     <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.css" />
     <script type="text/javascript">
@@ -96,10 +101,56 @@
       var ui = new firebaseui.auth.AuthUI(firebase.auth());
       // The start method will wait until the DOM is loaded.
       ui.start('#firebaseui-auth-container', uiConfig);
+        
+         initApp = function() {
+        firebase.auth().onAuthStateChanged(function(user) {
+          if (user) {
+            // User is signed in.
+            var displayName = user.displayName;
+            var email = user.email;
+            var emailVerified = user.emailVerified;
+            var photoURL = user.photoURL;
+            var uid = user.uid;
+            var providerData = user.providerData;
+            user.getToken().then(function(accessToken) {
+              //document.getElementById('sign-in-status').textContent = 'Signed in' ;
+              document.getElementById('sign-in').textContent = 'Sign out';
+/*              document.getElementById('account-details').textContent = JSON.stringify({
+                displayName: displayName,
+                email: email,
+                emailVerified: emailVerified,
+                photoURL: photoURL,
+                uid: uid,
+                accessToken: accessToken,
+                providerData: providerData
+              }, null, '  ');*/
+            });
+          } else {
+            // User is signed out.
+            //document.getElementById('sign-in-status').textContent = 'viewing as Guest.';
+            document.getElementById('sign-in').textContent = 'Sign in';
+            document.getElementById('sign-in').href = "login.html"
+            //document.getElementById('account-details').textContent = 'null';
+          }
+        }, function(error) {
+          console.log(error);
+        });
+      };
+      window.addEventListener('load', function() {
+        initApp()
+      });
+    
+          signout = function() {
+            firebase.auth().signOut().then(function() {
+            console.log('Signed Out');
+            }, function(error) {
+            console.error('Sign Out Error', error);
+            });
+        };
     </script>
         <div id="firebaseui-auth-container"></div>
 <br>
-
+    </center>
 
   <footer class="page-footer light-green darken-1">
     <div class="footer-copyright">
@@ -110,10 +161,5 @@
   </footer>
 
 
-  <!--  Scripts-->
-  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script src="js/materialize.js"></script>
-  <script src="js/init.js"></script>
-
-  </body>
+        </body>
 </html>

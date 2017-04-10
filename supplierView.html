@@ -38,7 +38,7 @@
       <ul id="nav-mobile" class="side-nav" >
           <li class="tab col s3"><a href="index.html">Home</a></li>
           <li class="tab col s3"><a href="about.html">About</a></li>
-          <li class="tab col s3"><a id="sign-in"></a></li>
+          <li class="tab col s3"><a id="sign-in" onclick="signout()"></a></li>
       </ul>
         <a href="#" data-activates="nav-mobile" class="button-collapse left"><i class="material-icons">menu</i></a>
     </div>
@@ -62,7 +62,7 @@
             user.getToken().then(function(accessToken) {
               document.getElementById('sign-in-status').textContent = 'Signed in' ;
               document.getElementById('sign-in').textContent = 'Sign out';
-              document.getElementById('account-details').textContent = JSON.stringify({
+             /* document.getElementById('account-details').textContent = JSON.stringify({
                 displayName: displayName,
                 email: email,
                 emailVerified: emailVerified,
@@ -70,14 +70,14 @@
                 uid: uid,
                 accessToken: accessToken,
                 providerData: providerData
-              }, null, '  ');
+              }, null, '  ');*/
             });
           } else {
             // User is signed out.
             document.getElementById('sign-in-status').textContent = 'viewing as Guest.';
             document.getElementById('sign-in').textContent = 'Sign in';
             document.getElementById('sign-in').href = "login.html"
-            document.getElementById('account-details').textContent = 'null';
+//            document.getElementById('account-details').textContent = 'null';
           }
         }, function(error) {
           console.log(error);
