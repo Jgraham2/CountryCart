@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>CountryCart</title>
+
+   <!-- update the version number as needed -->
+    <script defer src="/__/firebase/3.7.5/firebase-app.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/3.7.5/firebase-auth.js"></script>
+    <script defer src="/__/firebase/3.7.5/firebase-database.js"></script>
+    <script defer src="/__/firebase/3.7.5/firebase-messaging.js"></script>
+    <script defer src="/__/firebase/3.7.5/firebase-storage.js"></script>
+    <!-- initialize the SDK after all desired features are loaded -->
+    <script defer src="/__/firebase/init.js"></script>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+<body>
+  <nav class="deep-purple lighten-1" role="navigation">
+    <div class="nav-wrapper container" >       
+    <img class="logo center hide-on-med-and-down" src="images/whitearrows.png" height="42" width="42" align="center" alt="logo">
+        <a id="logo-container" class="brand-logo"></a> 
+<!-- Icon a combination of icons made by madebyoliver from www.flaticon.com  -->
+      <ul class="right hide-on-med-and-down">
+          <li class="tab col s3"><a href="about.html">About</a></li>
+          <li class="tab col s3"><a id="sign-in"></a></li>
+      </ul>
+      <ul id="nav-mobile" class="side-nav" >
+              <div class="circle center">
+        <img src="images/CC-Logo.png" height="85" width="85" align="center" >
+        <img src="images/cclogotxt.png"  height="80" width="100" align="center">
+      </div>
+      <li><div class="divider"></div></li>
+        <li class="tab col s3"><a href="about.html">About</a></li>
+        <li class="tab col s3"><a id="sign-in-mob"></a></li>
+      </ul>
+        <a href="#" data-activates="nav-mobile" class="button-collapse left"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+  <div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+      <br><br>
+      <h1 class="header center orange-text"></h1>
+        <div class="row center">
+            <img src="images/CC-Logo.png" height="80" width="220">
+            </div>
+            <div class="row center">
+                <img src="images/cclogotxt.png" height="150" width="300">
+                <h5 class="header col s12 light">Welcome to CountryCart! Your Local Goods Order Service.</h5>
+            </div>
+            <div class="row center">
+                <h6 class="header col s12 light">Please enter your postcode below to begin.</h6>
+            </div>
+            <form>
+
+                <div class="row">
+                    <div class="col s3 m4 l4"><p></p></div>
+                    <div class="input-field col s6 m4 l4">
+                        <input id="postcodeLookUp" type="text" class="validate">
+                        <label for="postcode">Postcode</label>
+                        <script>
+                            function getNewPostcode(input) {
+                            newPostcode = document.getElementById('postcodeLookUp').value;
+                            localStorage.setItem("Postcode", newPostcode);
+                            }
+                        </script>
+                    </div>
+                    <div class="col s6 m4 l6"><p></p></div>
+                </div>
+                <div class="row center">
+                    <a href="supplierView.html" id="download-button" class="btn-large waves-effect waves-light  red lighten-1">Order Now</a>
+                </div>
+                <br><br>
+            </form>
+        </div>
+  </div>
+    
+<script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>
+  <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyBhoPjNeZvo62IrIfi7GHARENckSZaoXGk",
+        authDomain: "countrycart-b276a.firebaseapp.com",
+        databaseURL: "https://countrycart-b276a.firebaseio.com",
+        storageBucket: "countrycart-b276a.appspot.com",
+        messagingSenderId: "717738134028"
+      };
+      firebase.initializeApp(config);
+  </script>
+   <script type="text/javascript">
+      initApp = function() {
+        firebase.auth().onAuthStateChanged(function(user) {
+          if (user) {
+            // User is signed in.
+              var strMessage1 = document.getElementById("message") ;
+              strMessage1.innerHTML = '<h5> Hi, ' + user.displayName + '.</h5>'
+            var displayName = user.displayName;
+            var email = user.email;
+            var emailVerified = user.emailVerified;
+            var photoURL = user.photoURL;
+            var uid = user.uid;
+            var providerData = user.providerData;
+            user.getToken().then(function(accessToken) {
+             // document.getElementById('sign-in-status').textContent = 'Signed in' ;
+              document.getElementById('sign-in').textContent = 'Sign out';
+              document.getElementById('sign-in-mob').href = "login.html"
+              document.getElementById('sign-in').href = "login.html"
+              document.getElementById('sign-in-mob').textContent = 'Sign out';
+              document.getElementById('account-details').textContent = JSON.stringify({
+                displayName: displayName,
+                email: email,
+                emailVerified: emailVerified,
+                photoURL: photoURL,
+                uid: uid,
+                accessToken: accessToken,
+                providerData: providerData
+              }, null, '  ');
+            });
+          } else {
+            // User is signed out.
+            //document.getElementById('sign-in-status').textContent = 'viewing as Guest.';
+            document.getElementById('sign-in').textContent = 'Sign in';
+            document.getElementById('sign-in-mob').textContent = 'Sign in';
+            document.getElementById('sign-in').href = "login.html"
+            document.getElementById('sign-in-mob').href = "login.html"
+            document.getElementById('account-details').textContent = 'null';
+          }
+        }, function(error) {
+          console.log(error);
+        });
+      };
+      window.addEventListener('load', function() {
+        initApp()
+      });
+    
+        signout = function() {
+            firebase.auth().signOut().then(function() {
+            console.log('Signed Out');
+            }, function(error) {
+            console.error('Sign Out Error', error);
+            });
+        };
+    </script>
+    <script src="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.css" />
+    <script type="text/javascript">
+      // FirebaseUI config.
+      var uiConfig = {
+        signInSuccessUrl: 'supplierView.html',
+        signInOptions: [
+          // Leave the lines as is for the providers you want to offer your users.
+          firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+          firebase.auth.EmailAuthProvider.PROVIDER_ID
+        ],
+        // Terms of service url.
+        tosUrl: '<your-tos-url>'
+      };
+
+      // Initialize the FirebaseUI Widget using Firebase.
+      var ui = new firebaseui.auth.AuthUI(firebase.auth());
+      // The start method will wait until the DOM is loaded.
+      ui.start('#firebaseui-auth-container', uiConfig);
+    </script>
+        <div id="firebaseui-auth-container"></div>
+<br>
+
+
+  <footer class="page-footer light-green darken-1">
+    <div class="footer-copyright">
+      <div class="container">
+    CountryCart Copyright © 2017. <br>Style by Materialize.
+      </div>
+    </div>
+  </footer>
+
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="js/materialize.js"></script>
+  <script src="js/init.js"></script>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+        // // The Firebase SDK is initialized and available here!
+        //
+        // firebase.auth().onAuthStateChanged(user => { });
+        // firebase.database().ref('/path/to/ref').on('data', snapshot => { });
+        // firebase.messaging().requestPermission().then(() => { });
+        // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
+        //
+        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+
+        try {
+          let app = firebase.app();
+          let features = ['auth', 'database', 'messaging', 'storage'].filter(feature => typeof app[feature] === 'function');
+          document.getElementById('load').innerHTML = `Firebase SDK loaded with ${features.join(', ')}`;
+        } catch (e) {
+          console.error(e);
+          document.getElementById('load').innerHTML = 'Error loading the Firebase SDK, check the console.';
+        }
+      });
+    </script>
+  </body>
+</html>
