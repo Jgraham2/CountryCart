@@ -6,6 +6,11 @@
   <meta charset="utf-8">
   <title>CountryCart</title>
 
+    <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
+  <script src="js/materialize.js"></script>
+  <script src="js/init.js"></script>
+
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
@@ -22,6 +27,8 @@
         messagingSenderId: "717738134028"
       };
       firebase.initializeApp(config);
+
+
   </script>
 <body>
   <nav class="deep-purple lighten-1" role="navigation">
@@ -37,16 +44,39 @@
       </ul>
 
       <ul id="nav-mobile" class="side-nav" >
+      <div class="circle center">
+        <img src="images/CC-Logo.png" height="85" width="85" align="center" >
+        <img src="images/cclogotxt.png"  height="80" width="100" align="center">
+      </div>
+      <li><div class="divider"></div></li>
           <li class="tab col s3"><a href="index.html">Home</a></li>
           <li class="tab col s3"><a href="about.html">About</a></li>
-          <li class="tab col s3"><a id="sign-in" onclick="signout()"></a></li>
+          <li class="tab col s3"><a id="sign-in-mob" onclick="signout()"></a></li>
+          <li><div class="divider"></div></li>
+      <li><a href="#!">First Sidebar Link</a></li>
+      <li><a href="#!">Second Sidebar Link</a></li>
+      <li class="no-padding">
+        <ul class="collapsible collapsible-accordion">
+          <li>
+            <a class="collapsible-header">Dropdown<i class="material-icons">arrow_drop_down</i></a>
+            <div class="collapsible-body">
+              <ul>
+                <li><a href="#!">First</a></li>
+                <li><a href="#!">Second</a></li>
+                <li><a href="#!">Third</a></li>
+                <li><a href="#!">Fourth</a></li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </li>
       </ul>
         <a href="#" data-activates="nav-mobile" class="button-collapse left"><i class="material-icons">menu</i></a>
     </div>
   </nav>
   <div class="section no-pad-bot" id="index-banner">
     <div class="container">
-        
+      
         <script type="text/javascript">
       initApp = function() {
         firebase.auth().onAuthStateChanged(function(user) {
@@ -63,7 +93,10 @@
             user.getToken().then(function(accessToken) {
               document.getElementById('sign-in-status').textContent = 'Signed in' ;
               document.getElementById('sign-in').textContent = 'Sign out';
-             /* document.getElementById('account-details').textContent = JSON.stringify({
+              document.getElementById('sign-in-mob').href = "login.html"
+              document.getElementById('sign-in').href = "login.html"
+              document.getElementById('sign-in-mob').textContent = 'Sign out';
+/*              document.getElementById('account-details').textContent = JSON.stringify({
                 displayName: displayName,
                 email: email,
                 emailVerified: emailVerified,
@@ -80,7 +113,7 @@
             document.getElementById('sign-in-mob').href = "login.html"
             document.getElementById('sign-in-mob').textContent = 'Sign out';
             document.getElementById('sign-in').href = "login.html"
-//            document.getElementById('account-details').textContent = 'null';
+            //document.getElementById('account-details').textContent = 'null';
           }
         }, function(error) {
           console.log(error);
@@ -98,90 +131,89 @@
             });
         };
     </script>
+        <ul id="slide-out" class="side-nav">
+        <div class="circle center">
+        <img src="images/CC-Logo.png" height="85" width="85" align="center" >
+        <img src="images/cclogotxt.png"  height="80" width="100" align="center">
+      </div>
+      <li><div class="divider"></div></li>
+      <li><a href="#!">First Sidebar Link</a></li>
+      <li><a href="#!">Second Sidebar Link</a></li>
+      <li class="no-padding">
+        <ul class="collapsible collapsible-accordion">
+          <li>
+            <a class="collapsible-header">Dropdown<i class="material-icons">arrow_drop_down</i></a>
+            <div class="collapsible-body">
+              <ul>
+                <li><a href="#!">First</a></li>
+                <li><a href="#!">Second</a></li>
+                <li><a href="#!">Third</a></li>
+                <li><a href="#!">Fourth</a></li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </li>
+    </ul>
+        <a href="#" data-activates="slide-out" class="button-collapse right"><i class="material-icons">dashboard</i></a>
+        
+          <script>
+            $(".button-collapse").sideNav();
+          </script>
     <h5 id="message"> </h5>
     <p>You are currently <a id="sign-in-status"></a> </p>
 
-      <style type="text/css">
-        #map
-        {
-          height:400px;
-          width:400px;
-          display:block;
-        }
-      </style>
-      <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5g7H14m6H89r4hWVnl9Ve5Ymldis6LJ8"></script>
-        
-      <script type="text/javascript">
-          function getPosition(callback) {
-            var geocoder = new google.maps.Geocoder();
-            var postcode = document.getElementById("postcode").value;
 
-            geocoder.geocode({'address': postcode}, function(results, status) 
-            {   
-              if (status == google.maps.GeocoderStatus.OK) 
-              {
-                callback({
-                  latt: results[0].geometry.location.lat(),
-                  long: results[0].geometry.location.lng()
-                });
-              }
-            });
-          }
 
-          function setup_map(latitude, longitude) { 
-            var _position = { lat: latitude, lng: longitude};
-            
-            var mapOptions = {
-              zoom: 16,
-              center: _position
-            }
+      <div class="col c6 m4 l6 container">
+      <form action="javascript:void(0)" id="form" >
+      
 
-            var map = new google.maps.Map(document.getElementById('map'), mapOptions);
-
-            var marker = new google.maps.Marker({
-              position: mapOptions.center,
-              map: map
-            });
-          }
-
-         window.onload = function() {
-            setup_map(51.5073509, -0.12775829999998223);
-          
-            document.getElementById("form").onsubmit = function() {
-              getPosition(function(position){
-
-                var text = document.getElementById("text")
-                text.innerHTML = "Marker position: { Longitude: "+position.long+ ",  Latitude:"+position.latt+" }";
-
-                setup_map(position.latt, position.long);
-              });
-              }
-            };       
-      </script>  
-      <form action="javascript:void(0)" id="form">
-        <input type="text" id="postcode" class="col s6 m4 l6" placeholder="Enter a postcode"/>
-        <input type="submit" value="Search"/>
-        <!--<a id="form-submit" type="submit"  onclick="" class="btn waves-effect red lighten-1">Search</a>-->
       </form>
-      <br>
-      <div id="map"></div>
-      <!--<div id="text"></div>-->
+      </div>
+      <div class="col c6 m4 l6 container right"> 
+      </div>
 <br>
-<ul class="collection">
-    <li class="collection-item avatar">
+<ul id="shops" class="collection">
+    <li id="list" class="collection-item avatar">
       <i class="material-icons circle red">play_arrow</i>
-      <span class="title">Title</span>
-      <p>First Line <br>
-         Second Line
+      <span class="title" id="name"></span>
+      <p>
       </p>
       <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
     </li>
   </ul>
+
+<script>
+  database = firebase.database();
+  var shopListRef  = database.ref('shoplist');
+  var companyRef = shopListRef.child('company');
+  var ul = document.getElementsByTagName("ul");
+  var list = document.getElementById("list");
+  companyRef.on("child_added", function(child) {
+  console.log(child.id+': '+child.val());
+  var ul = document.createElement('ul');
+  var li = document.createElement('li');
+  var span = document.createElement('span');
+  var p = document.createElement('p');
+  var p1 = document.createElement('p');
+  var p2 = document.createElement('p');
+  span.innerText = child.val().name;
+  p.innerText = child.val().street;
+  p1.innerText = child.val().town;
+  p2.innerText = child.val().type;
+  span.appendChild(p);
+  p.appendChild(p1);
+  p.appendChild(p2);
+  //table.appendChild(tr);
+  list.appendChild(span);
+  ul.appendChild(li);
+});
+</script>
+
             
 <br><br>
         <br><br>
-        <br><br>
-
               
   </div>
         
@@ -205,11 +237,6 @@
     </div>
   </footer>
 
-
-  <!--  Scripts-->
-  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script src="js/materialize.js"></script>
-  <script src="js/init.js"></script>
 
   </body>
 </html>
