@@ -177,7 +177,7 @@
 <div id="list">
 <ul>
     <li>
-      <i></i>
+      <i id="logo"></i>
       <span></span>
       <p>
       </p>
@@ -187,10 +187,20 @@
 </div>
 
 <script>
+    //storage
+  var storage = firebase.storage();
+  var storageRef = storage.ref();
   database = firebase.database();
   var shopListRef  = database.ref('shoplist');
   var companyRef = shopListRef.child('company');
   var list = document.getElementById("list");
+  //var imagesRef = storageRef.child('logos/' + companyRef.child.toString().name + '.jpg');
+    
+  storageRef.child('logos/' +companyRef.child.name.innerText+ '.jpg').getDownloadURL().then(function(url) {
+  var img = document.getElementById('logo');
+  img.src = url;});
+
+  //db
   companyRef.on("child_added", function(child) {
   console.log(child.id+': '+child.val());
   var ul = document.createElement('ul');
@@ -198,11 +208,7 @@
   var li = document.createElement('li');
   li.setAttribute("class", "collection-item avatar");
   var i = document.createElement('i');
-  i.setAttribute("id", "i_id");
-  i.setAttribute("class", "material-icons circle red");
-  i.setAttribute('type', 'text/javascript');
-  i.innerHTML = 'play_arrow';
-  //i.innerHTML("play_arrow");
+  i.setAttribute("class", "material-icons circle");
   var span = document.createElement('span');
   li.setAttribute("class", "title");
   var p = document.createElement('p');
@@ -220,6 +226,9 @@
   li.appendChild(p1);
   li.appendChild(p2);
   
+
+
+
   
 });
 </script>
