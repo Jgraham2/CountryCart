@@ -1,0 +1,330 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta charset="utf-8">
+    <title>CountryCart</title>
+    <!--  Scripts-->
+    <script src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
+    <script src="js/materialize.js"></script>
+    <script src="js/init.js"></script>
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+</head>
+<script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>
+<script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyBhoPjNeZvo62IrIfi7GHARENckSZaoXGk",
+        authDomain: "countrycart-b276a.firebaseapp.com",
+        databaseURL: "https://countrycart-b276a.firebaseio.com",
+        storageBucket: "countrycart-b276a.appspot.com",
+        messagingSenderId: "717738134028"
+      };
+      firebase.initializeApp(config);
+
+      window.onload = function() {
+          var storedValue = localStorage.getItem("postcode");
+          document.getElementById('code').textContent = storedValue;
+      }
+
+</script>
+<body>
+    <nav class="deep-purple lighten-1" role="navigation">
+        <div class="nav-wrapper container">
+            <img class="logo center hide-on-med-and-down" src="images/whitearrows.png" height="42" width="42" align="center" alt="logo">
+            <a id="logo-container" class="brand-logo"></a>
+            <!-- Icon made by Baianat from www.flaticon.com  -->
+            <ul class="right hide-on-med-and-down">
+                <li><a href="#"></a></li>
+                <li class="tab col s3"><a href="index.html">Home</a></li>
+                <li class="tab col s3"><a href="about.html">About</a></li>
+                <li class="tab col s3"><a id="sign-in" onclick="signout()"></a></li>
+            </ul>
+            <ul id="nav-mobile" class="side-nav">
+                <div class="circle center">
+                    <img src="images/CC-Logo.png" height="85" width="85" align="center">
+                    <img src="images/cclogotxt.png" height="80" width="100" align="center">
+                </div>
+                <li><div class="divider"></div></li>
+                <li class="tab col s3"><a href="index.html">Home</a></li>
+                <li class="tab col s3"><a href="about.html">About</a></li>
+                <li class="tab col s3"><a id="sign-in-mob" onclick="signout()"></a></li>
+                <li><div class="divider"></div></li>
+                <li><a href="#!">First Sidebar Link</a></li>
+                <li><a href="#!">Second Sidebar Link</a></li>
+                <li class="no-padding">
+                    <ul class="collapsible collapsible-accordion">
+                        <li>
+                            <a class="collapsible-header">Dropdown<i class="material-icons">arrow_drop_down</i></a>
+                            <div class="collapsible-body">
+                                <ul>
+                                    <li><a href="#!">First</a></li>
+                                    <li><a href="#!">Second</a></li>
+                                    <li><a href="#!">Third</a></li>
+                                    <li><a href="#!">Fourth</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <a href="#" data-activates="nav-mobile" class="button-collapse left"><i class="material-icons">menu</i></a>
+
+            <script>
+            $(".button-collapse").sideNav();
+            </script>
+        </div>
+    </nav>
+    <div class="section no-pad-bot" id="index-banner">
+        <div class="container">
+
+            <script type="text/javascript">
+      initApp = function() {
+        firebase.auth().onAuthStateChanged(function(user) {
+          if (user) {
+            // User is signed in.
+              var strMessage1 = document.getElementById("message") ;
+              strMessage1.innerHTML = '<h5> Hi, ' + user.displayName + '.</h5>'
+            var displayName = user.displayName;
+            var email = user.email;
+            var emailVerified = user.emailVerified;
+            var photoURL = user.photoURL;
+            var uid = user.uid;
+            var providerData = user.providerData;
+            user.getToken().then(function(accessToken) {
+              document.getElementById('sign-in-status').textContent = 'Signed in' ;
+              document.getElementById('sign-in').textContent = 'Sign out';
+              document.getElementById('sign-in-mob').href = "login.html"
+              document.getElementById('sign-in').href = "login.html"
+              document.getElementById('sign-in-mob').textContent = 'Sign out';
+/*              document.getElementById('account-details').textContent = JSON.stringify({
+                displayName: displayName,
+                email: email,
+                emailVerified: emailVerified,
+                photoURL: photoURL,
+                uid: uid,
+                accessToken: accessToken,
+                providerData: providerData
+              }, null, '  ');*/
+            });
+          } else {
+            // User is signed out.
+            document.getElementById('sign-in-status').textContent = 'viewing as Guest.';
+            document.getElementById('sign-in').textContent = 'Sign in';
+            document.getElementById('sign-in-mob').href = "login.html"
+            document.getElementById('sign-in-mob').textContent = 'Sign out';
+            document.getElementById('sign-in').href = "login.html"
+            //document.getElementById('account-details').textContent = 'null';
+          }
+        }, function(error) {
+          console.log(error);
+        });
+      };
+      window.addEventListener('load', function() {
+        initApp()
+      });
+
+        signout = function() {
+            firebase.auth().signOut().then(function() {
+            console.log('Signed Out');
+            }, function(error) {
+            console.error('Sign Out Error', error);
+            });
+        };
+            </script>
+            <ul id="slide-out" class="side-nav">
+                <div class="circle center">
+                    <img src="images/CC-Logo.png" height="85" width="85" align="center">
+                    <img src="images/cclogotxt.png" height="80" width="100" align="center">
+                </div>
+                <li><div class="divider"></div></li>
+                <li><a href="#!">First Sidebar Link</a></li>
+                <li><a href="#!">Second Sidebar Link</a></li>
+                <li class="no-padding">
+                    <ul class="collapsible collapsible-accordion">
+                        <li>
+                            <a class="collapsible-header">Dropdown<i class="material-icons">arrow_drop_down</i></a>
+                            <div class="collapsible-body">
+                                <ul>
+                                    <li><a href="#!">First</a></li>
+                                    <li><a href="#!">Second</a></li>
+                                    <li><a href="#!">Third</a></li>
+                                    <li><a href="#!">Fourth</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <a href="#" data-activates="slide-out" class="button-collapse right"><i class="material-icons">dashboard</i></a>
+
+
+            <h5 id="message"> </h5>
+            <div>
+                <p class="left">You are <a id="sign-in-status"></a> </p>
+
+                <p class="right">Postcode: <a id="code"></a> </p>
+            </div>
+            <br><br>
+            <div class="col c6 m4 l6 container center">
+                <h5>{companyRef.Name}</h5>
+                </div><br>
+            <div class="col c6 m4 l6 container center">
+                <h6>{companyRef.Logo}</h6>
+            </div><br>
+
+    <ul class="collapsible blue lighten-1" data-collapsible="accordion">
+     <li>
+        <div class="collapsible-header blue lighten-1"><h5 class="white-text">{companyRef.Name.MenuItem}</h5></div>
+        <div class="collapsible-body white">
+            <p>
+                <div class="container white">
+                    <div class="input-field col s6">
+                        
+                            </div>
+                        </div>
+                <br><br>
+            </p>
+        </div>
+      </li>
+        <li>
+            <div class="collapsible-header blue lighten-1"><h5 class="white-text">{companyRef.Name.MenuItem}</h5></div>
+            <div class="collapsible-body white">
+                <p>
+                    <div class="container white">
+                        <div class="input-field col s6">
+
+                        </div>
+                    </div>
+                    <br><br>
+                </p>
+            </div>
+        </li>
+        <li>
+            <div class="collapsible-header blue lighten-1"><h5 class="white-text">{companyRef.Name.MenuItem}</h5></div>
+            <div class="collapsible-body white">
+                <p>
+                    <div class="container white">
+                        <div class="input-field col s6">
+
+                        </div>
+                    </div>
+                    <br><br>
+                </p>
+            </div>
+        </li>
+        <li>
+            <div class="collapsible-header blue lighten-1"><h5 class="white-text">{companyRef.Name.MenuItem}</h5></div>
+            <div class="collapsible-body white">
+                <p>
+                    <div class="container white">
+                        <div class="input-field col s6">
+
+                        </div>
+                    </div>
+                    <br><br>
+                </p>
+            </div>
+        </li>
+        <li>
+            <div class="collapsible-header blue lighten-1"><h5 class="white-text">{companyRef.Name.MenuItem}</h5></div>
+            <div class="collapsible-body white">
+                <p>
+                    <div class="container white">
+                        <div class="input-field col s6">
+
+                        </div>
+                    </div>
+                    <br><br>
+                </p>
+            </div>
+        </li>
+        <li>
+            <div class="collapsible-header blue lighten-1"><h5 class="white-text">{companyRef.Name.MenuItem}</h5></div>
+            <div class="collapsible-body white">
+                <p>
+                    <div class="container white">
+                        <div class="input-field col s6">
+
+                        </div>
+                    </div>
+                    <br><br>
+                </p>
+            </div>
+        </li>
+        <li>
+            <div class="collapsible-header blue lighten-1"><h5 class="white-text">{companyRef.Name.MenuItem}</h5></div>
+            <div class="collapsible-body white">
+                <p>
+                    <div class="container white">
+                        <div class="input-field col s6">
+
+                        </div>
+                    </div>
+                    <br><br>
+                </p>
+            </div>
+        </li>
+        <li>
+            <div class="collapsible-header blue lighten-1"><h5 class="white-text">{companyRef.Name.MenuItem}</h5></div>
+            <div class="collapsible-body white">
+                <p>
+                    <div class="container white">
+                        <div class="input-field col s6">
+
+                        </div>
+                    </div>
+                    <br><br>
+                </p>
+            </div>
+        </li>
+
+
+    </ul>
+
+    <br>
+
+    </div>
+    <div class="col c6 m4 l6 container right">
+    </div>
+    <br>
+    <div id="list">
+        <ul>
+            <li>
+                <i id="logo"></i>
+                <span></span>
+                <p>
+                </p>
+                <!--<a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>-->
+            </li>
+        </ul>
+    </div>
+
+
+    <br><br>
+    <br><br>
+
+    </div>
+
+
+    </div>
+    <br><br>
+    <div class="section">
+    </div>
+    <div class="row center">
+        <img src="images/CC-Logo.png" height="40" width="120">
+    </div>
+    <footer class="page-footer light-green darken-1">
+        <div class="footer-copyright">
+            <div class="container">
+                CountryCart Copyright © 2017. <br>Style by Materialize.
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
