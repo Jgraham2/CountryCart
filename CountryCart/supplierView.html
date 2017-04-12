@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta http-equiv="Content-Type" content="text/html"/>
@@ -17,7 +17,7 @@
   <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 </head>
     <script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>
-  <script>
+<script>
       // Initialize Firebase
       var config = {
         apiKey: "AIzaSyBhoPjNeZvo62IrIfi7GHARENckSZaoXGk",
@@ -27,7 +27,11 @@
         messagingSenderId: "717738134028"
       };
       firebase.initializeApp(config);
-
+     
+      window.onload = function() {
+          var storedValue = localStorage.getItem("postcode");
+          document.getElementById('code').textContent = storedValue;
+      }
 
   </script>
 <body>
@@ -161,10 +165,12 @@
             $(".button-collapse").sideNav();
           </script>
     <h5 id="message"> </h5>
-    <p>You are currently <a id="sign-in-status"></a> </p>
+        <div>
+            <p class="left">You are currently <a id="sign-in-status"></a> </p>
 
-
-
+            <p class="right">Postcode: <a id="code"></a> </p>
+        </div>
+        <br>
       <div class="col c6 m4 l6 container">
       <form action="javascript:void(0)" id="form" >
       
@@ -187,6 +193,7 @@
 </div>
 
 <script>
+
     //storage
   var storage = firebase.storage();
   var storageRef = storage.ref();

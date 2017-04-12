@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -61,20 +61,21 @@
                 <div class="row">
                     <div class="col s3 m4 l4"><p></p></div>
                     <div class="input-field col s6 m4 l4">
-                        <input id="postcodeLookUp" type="text" class="validate">
+                        <input id="postcode" type="text" class="validate">
                         <label for="postcode">Postcode</label>
-                        <script>
-                            function getNewPostcode(input) {
-                            newPostcode = document.getElementById('postcodeLookUp').value;
-                            localStorage.setItem("Postcode", newPostcode);
-                            }
-                        </script>
                     </div>
                     <div class="col s6 m4 l6"><p></p></div>
                 </div>
                 <div class="row center">
-                    <a href="supplierView.html" id="download-button" class="btn-large waves-effect waves-light  red lighten-1">Order Now</a>
+                    <a href="supplierView.html" id="order" type="text" class="btn-large waves-effect waves-light  red lighten-1" onclick="saveData();">Order Now</a>
                 </div>
+                <script>
+                    function saveData() {
+                    var input = document.getElementById("postcode");
+                    localStorage.setItem("postcode", input.value);
+                    }
+
+                </script>
                 <br><br>
             </form>
         </div>
@@ -185,6 +186,7 @@
   <script src="js/init.js"></script>
 
     <script>
+
       document.addEventListener('DOMContentLoaded', function() {
         // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
         // // The Firebase SDK is initialized and available here!
