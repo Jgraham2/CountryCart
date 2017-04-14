@@ -87,7 +87,7 @@
           if (user) {
             // User is signed in.
               var strMessage1 = document.getElementById("message") ;
-              strMessage1.innerHTML = '<h5> Hi, ' + user.displayName + '.</h5>'
+              strMessage1.innerHTML = '<h5> Hello, ' + user.displayName + '.</h5>'
             var displayName = user.displayName;
             var email = user.email;
             var emailVerified = user.emailVerified;
@@ -159,12 +159,12 @@
         </ul>
       </li>
     </ul>
-        <a href="#" data-activates="slide-out" class="button-collapse right"><i class="material-icons">dashboard</i></a>
-        
+        <a href="#" data-activates="slide-out" class="button-collapse right"><i class="material-icons">dashboard</i></a> 
           <script>
             $(".button-collapse").sideNav();
           </script>
-    <h5 id="message"> </h5>
+    
+    <h5 id="message">Hello! Here is your Local Selection.</h5>
         <div>
             <p class="left">You are <a id="sign-in-status"></a> </p>
 
