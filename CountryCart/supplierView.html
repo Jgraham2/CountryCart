@@ -180,14 +180,17 @@
       <div class="col c6 m4 l6 container right"> 
       </div>
 <br>
-<div id="list">
+<div id="list" class="col c6 m4 l6">
 <ul>
     <li>
-      <i id="logo"></i>
+      <i></i>
       <span></span>
       <p>
+        <i></i>
+        <a></a>
       </p>
       <!--<a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>-->
+      
     </li>
   </ul>
 </div>
@@ -210,31 +213,38 @@
   //db
   companyRef.on("child_added", function(child) {
   console.log(child.id+': '+child.val());
+  var a = document.createElement('a');
   var ul = document.createElement('ul');
+  a.setAttribute("href", "menu.html");
+  a.setAttribute("id", "select");
+  a.setAttribute("class", "btn-large waves-effect waves-light red lighten-1 right");
   ul.setAttribute("class", "collection");
   var li = document.createElement('li');
   li.setAttribute("class", "collection-item avatar");
+  li.setAttribute("style", "padding-left: 0.5cm;"); 
   var i = document.createElement('i');
   i.setAttribute("class", "material-icons circle");
+  i.setAttribute("id", "logo");
   var span = document.createElement('span');
+  span.setAttribute("style", "font-size: x-large; font-style: bold; text-transform: capitalize;"); 
   li.setAttribute("class", "title");
   var p = document.createElement('p');
+  p.setAttribute("style", "padding-right: 0.5cm;"); 
   var p1 = document.createElement('p');
   var p2 = document.createElement('p');
   span.innerText = child.val().name;
-  p.innerText = child.val().street;
-  p1.innerText = child.val().town;
-  p2.innerText = child.val().type;
+  p.innerText = 'Address: ' + child.val().street;
+  p1.innerText = 'Town: '+ child.val().town;
+  p2.innerText = 'Type: ' + child.val().type;
+  a.textContent = 'Select';
   list.appendChild(ul);
   ul.appendChild(li);
-  li.appendChild(i);
   li.appendChild(span);
   li.appendChild(p);
   li.appendChild(p1);
   li.appendChild(p2);
-  
-
-
+  p.appendChild(i);
+  p.appendChild(a);
 
   
 });
