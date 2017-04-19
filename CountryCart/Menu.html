@@ -162,147 +162,86 @@
             </ul>
             <a href="#" data-activates="slide-out" class="button-collapse right"><i class="material-icons">dashboard</i></a>
 
+<br>
+        <div>
+            <p class="left">You are <a id="sign-in-status"></a> </p>
 
-            <h5 id="message"> </h5>
-            <div>
-                <p class="left">You are <a id="sign-in-status"></a> </p>
-
-                <p class="right">Postcode: <a id="code"></a> </p>
-            </div>
-            <br><br>
-            <div class="col c6 m4 l6 container center">
-                <h5>{companyRef.Name}</h5>
-                </div><br>
-            <div class="col c6 m4 l6 container center">
-                <h6>{companyRef.Logo}</h6>
-            </div><br>
-
-    <ul class="collapsible blue lighten-1" data-collapsible="accordion">
-     <li>
-        <div class="collapsible-header blue lighten-1"><h5 class="white-text">{companyRef.Name.MenuItem}</h5></div>
-        <div class="collapsible-body white">
-            <p>
-                <div class="container white">
-                    <div class="input-field col s6">
-                        
-                            </div>
-                        </div>
-                <br><br>
-            </p>
+            <p class="right">Postcode: <a id="code"></a> </p>
         </div>
-      </li>
-        <li>
-            <div class="collapsible-header blue lighten-1"><h5 class="white-text">{companyRef.Name.MenuItem}</h5></div>
-            <div class="collapsible-body white">
-                <p>
-                    <div class="container white">
-                        <div class="input-field col s6">
+        <br>
+            <br><br>
+<div id="set" class="col c6 m4 l6 container center"> 
+            <h5></h5>
+            <br>
+            <h6></h6>
+</div>
+<div id="items">
+    <ul data-collapsible="accordion">
+     <li>
+        <div>
+            <h5></h5>
+        </div>
+        <div>
+        <li><a></a></li>
+                <div>
+                </div>
+                <br>
+        </div>
+    </li>
+   </ul>
+</div>
+<script>
+  //db
+  var storage = firebase.storage();
+  var storageRef = storage.ref();   
+  database = firebase.database();
+  var shopListRef  = database.ref('shoplist');
+  var companyRef = shopListRef.child('company');
+  var set = document.getElementById("set");
+  var pageTitle = document.createElement('h5');
+  var pageSubTitle = document.createElement('img');
+  var img = storageRef.child('logos/' +companyRef.child.key+ '.png');
+  pageTitle.innerText = companyRef.child("Farmco").key;
+  pageSubTitle.setAttribute("src", img);
+  set.appendChild(pageTitle);
+  set.appendChild(pageSubTitle);
+  var items = document.getElementById("items");
+  var ul = document.createElement('ul');
+  var li = document.createElement('li');
+  var li3 = document.createElement('li');
+  var div = document.createElement('div');
+  var div1 = document.createElement('div');
+  var h5 = document.createElement('h5');
+  var a = document.createElement('a');
+  var br = document.createElement('br');
+  var div2 = document.createElement('div');
+  div.setAttribute("class", "collapsible-header blue lighten-1");
+  div1.setAttribute("class", "collapsible-body white");
+  h5.setAttribute("class", "white-text");
+  ul.setAttribute("class", "collapsible blue lighten-1");
+  ul.setAttribute("data-collapsible", "accordion");
+  div2.setAttribute("class", "input-field col s6");
+  var newItems = true;
+  var itemsList  = database.ref('shoplist/company/Farmco/menu');
+  itemsList.once('child_added', function(child) {
+  if (!newItems) return;
+  var menuItem = child.key;
+  h5.innerText = menuItem; 
+  var itemName = menuItem;
+  a.innerText = itemName.key;
+  items.appendChild(ul);
+  ul.appendChild(li);
+  li.appendChild(div);
+  li.appendChild(div1);
+  div.appendChild(h5);
+  div1.appendChild(li3);
+  li3.appendChild(a);
+  div1.appendChild(div2);
+  div1.appendChild(br);
+  });
 
-                        </div>
-                    </div>
-                    <br><br>
-                </p>
-            </div>
-        </li>
-        <li>
-            <div class="collapsible-header blue lighten-1"><h5 class="white-text">{companyRef.Name.MenuItem}</h5></div>
-            <div class="collapsible-body white">
-                <p>
-                    <div class="container white">
-                        <div class="input-field col s6">
-
-                        </div>
-                    </div>
-                    <br><br>
-                </p>
-            </div>
-        </li>
-        <li>
-            <div class="collapsible-header blue lighten-1"><h5 class="white-text">{companyRef.Name.MenuItem}</h5></div>
-            <div class="collapsible-body white">
-                <p>
-                    <div class="container white">
-                        <div class="input-field col s6">
-
-                        </div>
-                    </div>
-                    <br><br>
-                </p>
-            </div>
-        </li>
-        <li>
-            <div class="collapsible-header blue lighten-1"><h5 class="white-text">{companyRef.Name.MenuItem}</h5></div>
-            <div class="collapsible-body white">
-                <p>
-                    <div class="container white">
-                        <div class="input-field col s6">
-
-                        </div>
-                    </div>
-                    <br><br>
-                </p>
-            </div>
-        </li>
-        <li>
-            <div class="collapsible-header blue lighten-1"><h5 class="white-text">{companyRef.Name.MenuItem}</h5></div>
-            <div class="collapsible-body white">
-                <p>
-                    <div class="container white">
-                        <div class="input-field col s6">
-
-                        </div>
-                    </div>
-                    <br><br>
-                </p>
-            </div>
-        </li>
-        <li>
-            <div class="collapsible-header blue lighten-1"><h5 class="white-text">{companyRef.Name.MenuItem}</h5></div>
-            <div class="collapsible-body white">
-                <p>
-                    <div class="container white">
-                        <div class="input-field col s6">
-
-                        </div>
-                    </div>
-                    <br><br>
-                </p>
-            </div>
-        </li>
-        <li>
-            <div class="collapsible-header blue lighten-1"><h5 class="white-text">{companyRef.Name.MenuItem}</h5></div>
-            <div class="collapsible-body white">
-                <p>
-                    <div class="container white">
-                        <div class="input-field col s6">
-
-                        </div>
-                    </div>
-                    <br><br>
-                </p>
-            </div>
-        </li>
-
-
-    </ul>
-
-    <br>
-
-    </div>
-    <div class="col c6 m4 l6 container right">
-    </div>
-    <br>
-    <div id="list">
-        <ul>
-            <li>
-                <i id="logo"></i>
-                <span></span>
-                <p>
-                </p>
-                <!--<a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>-->
-            </li>
-        </ul>
-    </div>
+  
+</script>
 
 
     <br><br>
