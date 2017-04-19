@@ -54,3 +54,10 @@ h5
 {
 	position: absolute;
 }
+
+html, body, #map_canvas {
+    height: 500px;
+    width: 500px;
+    margin: 0px;
+    padding: 0px;
+}

@@ -1,0 +1,398 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta charset="utf-8">
+  <title>CountryCart</title>
+
+    <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
+  <script src="js/materialize.js"></script>
+  <script src="js/init.js"></script>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+    <script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>
+<script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyBhoPjNeZvo62IrIfi7GHARENckSZaoXGk",
+        authDomain: "countrycart-b276a.firebaseapp.com",
+        databaseURL: "https://countrycart-b276a.firebaseio.com",
+        storageBucket: "countrycart-b276a.appspot.com",
+        messagingSenderId: "717738134028"
+      };
+      firebase.initializeApp(config);
+     
+      window.onload = function() {
+          var storedValue = localStorage.getItem("postcode");
+          document.getElementById('code').textContent = storedValue;
+      }
+
+  </script>
+<body>
+  <nav class="deep-purple lighten-1" role="navigation">
+    <div class="nav-wrapper container" >       
+    <img class="logo center hide-on-med-and-down" src="images/whitearrows.png" height="42" width="42" align="center" alt="logo">
+        <a id="logo-container" class="brand-logo"></a> 
+<!-- Icon made by Baianat from www.flaticon.com  -->
+      <ul class="right hide-on-med-and-down">
+        <li><a href="#"></a></li>
+          <li class="tab col s3"><a href="index.html">Home</a></li>
+          <li class="tab col s3"><a href="about.html">About</a></li>
+          <li class="tab col s3"><a id="sign-in" onclick="signout()"></a></li>
+      </ul>
+
+      <ul id="nav-mobile" class="side-nav" >
+      <div class="circle center">
+        <img src="images/CC-Logo.png" height="85" width="85" align="center" >
+        <img src="images/cclogotxt.png"  height="80" width="100" align="center">
+      </div>
+      <li><div class="divider"></div></li>
+          <li class="tab col s3"><a href="index.html">Home</a></li>
+          <li class="tab col s3"><a href="about.html">About</a></li>
+          <li class="tab col s3"><a id="sign-in-mob" onclick="signout()"></a></li>
+          <li><div class="divider"></div></li>
+      <li><a href="#!">First Sidebar Link</a></li>
+      <li><a href="#!">Second Sidebar Link</a></li>
+      <li class="no-padding">
+        <ul class="collapsible collapsible-accordion">
+          <li>
+            <a class="collapsible-header">Dropdown<i class="material-icons">arrow_drop_down</i></a>
+            <div class="collapsible-body">
+              <ul>
+                <li><a href="#!">First</a></li>
+                <li><a href="#!">Second</a></li>
+                <li><a href="#!">Third</a></li>
+                <li><a href="#!">Fourth</a></li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </li>
+      </ul>
+        <a href="#" data-activates="nav-mobile" class="button-collapse left"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+  <div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+      
+        <script type="text/javascript">
+      initApp = function() {
+        firebase.auth().onAuthStateChanged(function(user) {
+          if (user) {
+            // User is signed in.
+              var strMessage1 = document.getElementById("message") ;
+              strMessage1.innerHTML = '<h5> Hello, ' + user.displayName + '.</h5>'
+            var displayName = user.displayName;
+            var email = user.email;
+            var emailVerified = user.emailVerified;
+            var photoURL = user.photoURL;
+            var uid = user.uid;
+            var providerData = user.providerData;
+            user.getToken().then(function(accessToken) {
+              document.getElementById('sign-in-status').textContent = 'Signed in' ;
+              document.getElementById('sign-in').textContent = 'Sign out';
+              document.getElementById('sign-in-mob').href = "login.html"
+              document.getElementById('sign-in').href = "login.html"
+              document.getElementById('sign-in-mob').textContent = 'Sign out';
+/*              document.getElementById('account-details').textContent = JSON.stringify({
+                displayName: displayName,
+                email: email,
+                emailVerified: emailVerified,
+                photoURL: photoURL,
+                uid: uid,
+                accessToken: accessToken,
+                providerData: providerData
+              }, null, '  ');*/
+            });
+          } else {
+            // User is signed out.
+            document.getElementById('sign-in-status').textContent = 'viewing as Guest.';
+            document.getElementById('sign-in').textContent = 'Sign in';
+            document.getElementById('sign-in-mob').href = "login.html"
+            document.getElementById('sign-in-mob').textContent = 'Sign out';
+            document.getElementById('sign-in').href = "login.html"
+            //document.getElementById('account-details').textContent = 'null';
+          }
+        }, function(error) {
+          console.log(error);
+        });
+      };
+      window.addEventListener('load', function() {
+        initApp()
+      });
+    
+        signout = function() {
+            firebase.auth().signOut().then(function() {
+            console.log('Signed Out');
+            }, function(error) {
+            console.error('Sign Out Error', error);
+            });
+        };
+    </script>
+        <ul id="slide-out" class="side-nav">
+        <div class="circle center">
+        <img src="images/CC-Logo.png" height="85" width="85" align="center" >
+        <img src="images/cclogotxt.png"  height="80" width="100" align="center">
+      </div>
+      <li><div class="divider"></div></li>
+      <li><a href="#!">First Sidebar Link</a></li>
+      <li><a href="#!">Second Sidebar Link</a></li>
+      <li class="no-padding">
+        <ul class="collapsible collapsible-accordion">
+          <li>
+            <a class="collapsible-header">Dropdown<i class="material-icons">arrow_drop_down</i></a>
+            <div class="collapsible-body">
+              <ul>
+                <li><a href="#!">First</a></li>
+                <li><a href="#!">Second</a></li>
+                <li><a href="#!">Third</a></li>
+                <li><a href="#!">Fourth</a></li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </li>
+    </ul>
+        <a href="#" data-activates="slide-out" class="button-collapse right"><i class="material-icons">dashboard</i></a> 
+          <script>
+            $(".button-collapse").sideNav();
+          </script>
+    
+    <h5 id="message">Hello! Here is your Local Selection.</h5>
+        <div>
+            <p class="left">You are <a id="sign-in-status"></a> </p>
+
+            <p class="right">Postcode: <a id="code"></a> </p>
+        </div>
+        <br>
+
+<style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+    <br><br>
+    <div class="col c6 m4 l6 container" > 
+    <div id="map_canvas" class="col c6 m4 l6 container" style="width:100%; height:400px; border: 2px solid #3872ac;"></div>
+    </div>
+    <script>
+      var locations = [
+    ['Ormeau Embankment', 'Ozone Complex, Ormeau Embankment, Belfast BT6 8LT', 'Button1', 'Button2', 'Button3'],
+    ['Connswater Car Park', 'Connswater Shopping Centre, Bloomfield Ave, Newtownards Rd, Belfast BT5 5LP', 'Button1', 'Button2', 'Button3'],
+    ['Boucher Car Park', 'Boucher Retail Park, Boucher Crescent, Belfast, BT12 6QH', 'Button1', 'Button2', 'Button3']
+];
+
+var geocoder;
+var map;
+var bounds = new google.maps.LatLngBounds();
+
+function initialize() {
+    map = new google.maps.Map(
+    document.getElementById("map_canvas"), {
+        center: new google.maps.LatLng(54.581827, -5.937469),
+        zoom: 13,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
+    geocoder = new google.maps.Geocoder();
+
+    for (i = 0; i < locations.length; i++) {
+
+
+        geocodeAddress(locations, i);
+    }
+
+		//Resize Function
+		google.maps.event.addDomListener(window, "resize", function() {
+			var center = map.getCenter();
+			google.maps.event.trigger(map, "resize");
+			map.setCenter(center);
+		});
+	}
+
+google.maps.event.addDomListener(window, "load", initialize);
+
+function geocodeAddress(locations, i) {
+    var title = locations[i][0];
+    var address = locations[i][1];
+    var button1 = locations[i][2];
+    var button2 = locations[i][3];
+    var button3 = locations[i][4];
+    geocoder.geocode({
+        'address': locations[i][1]
+    },
+
+    function (results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+            var marker = new google.maps.Marker({
+                icon: 'http://maps.google.com/mapfiles/ms/icons/purple.png',
+                map: map,
+                position: results[0].geometry.location,
+                title: title,
+                animation: google.maps.Animation.DROP,
+                address: address,
+                button1: button1,
+                button2: button2,
+                button3: button3
+            })
+            infoWindow(marker, map, title, address, button1, button2, button3);
+            bounds.extend(marker.getPosition());
+            map.fitBounds(bounds);
+        } else {
+            alert("geocode of " + address + " failed:" + status);
+        }
+    });
+}
+
+function infoWindow(marker, map, title, address, button1, button2, button3) {
+    google.maps.event.addListener(marker, 'click', function () {
+        var html = "<div><h5>" + title + "</h5><p>" + address + 
+        "<br></div><a class='btn waves-effect waves-light red lighten-1 href='" + button1 + 
+        "'>10:30</a><span> &nbsp;&nbsp;</span> <a class='btn waves-effect waves-light red lighten-1' href='" + button2 + 
+        "'>14:30</a><span> &nbsp;&nbsp;</span> <a class='btn waves-effect waves-light red lighten-1' href='" + button3 + 
+        "'>5:30</a></p></div>";
+        iw = new google.maps.InfoWindow({
+            content: html,
+            maxWidth: 350
+        });
+        iw.open(map, marker);
+    });
+}
+
+function createMarker(results) {
+    var marker = new google.maps.Marker({
+        icon: 'http://maps.google.com/mapfiles/ms/icons/blue.png',
+        map: map,
+        position: results[0].geometry.location,
+        title: title,
+        animation: google.maps.Animation.DROP,
+        address: address,
+        button1: button1,
+        button2: button2,
+        button3: button3
+    })
+    bounds.extend(marker.getPosition());
+    map.fitBounds(bounds);
+    infoWindow(marker, map, title, address, button1, button2, button3);
+    return marker;
+}
+
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDSXLttVdAixH5IdwZK7inIlgQ3CWDjCw0&callback=initialize">
+    </script>
+
+
+<br>
+<!--<div id="list" class="col c6 m4 l6">
+<ul>
+    <li>
+      <i></i>
+      <span></span>
+      <p>
+        <i></i>
+        <a></a>
+      </p>
+      
+      
+    </li>
+  </ul>
+</div>
+
+<script>
+
+    //storage
+  var storage = firebase.storage();
+  var storageRef = storage.ref();
+  database = firebase.database();
+  var shopListRef  = database.ref('shoplist');
+  var companyRef = shopListRef.child('company');
+  var list = document.getElementById("list");
+  //var imagesRef = storageRef.child('logos/' + companyRef.child.toString().name + '.jpg');
+    
+  storageRef.child('logos/' +companyRef.child.name.innerText+ '.jpg').getDownloadURL().then(function(url) {
+  var img = document.getElementById('logo');
+  img.src = url;});
+
+  //db
+  companyRef.on("child_added", function(child) {
+  console.log(child.id+': '+child.val());
+  var a = document.createElement('a');
+  var ul = document.createElement('ul');
+  a.setAttribute("href", "menu.html");
+  a.setAttribute("id", "select");
+  a.setAttribute("class", "btn-large waves-effect waves-light red lighten-1 right");
+  ul.setAttribute("class", "collection");
+  var li = document.createElement('li');
+  li.setAttribute("class", "collection-item avatar");
+  li.setAttribute("style", "padding-left: 0.5cm;"); 
+  var i = document.createElement('i');
+  i.setAttribute("class", "material-icons circle");
+  i.setAttribute("id", "logo");
+  var span = document.createElement('span');
+  span.setAttribute("style", "font-size: x-large; font-style: bold; text-transform: capitalize;"); 
+  li.setAttribute("class", "title");
+  var p = document.createElement('p');
+  p.setAttribute("style", "padding-right: 0.5cm;"); 
+  var p1 = document.createElement('p');
+  var p2 = document.createElement('p');
+  span.innerText = child.val().name;
+  p.innerText = 'Address: ' + child.val().street;
+  p1.innerText = 'Town: '+ child.val().town;
+  p2.innerText = 'Type: ' + child.val().type;
+  a.textContent = 'Select';
+  list.appendChild(ul);
+  ul.appendChild(li);
+  li.appendChild(span);
+  li.appendChild(p);
+  li.appendChild(p1);
+  li.appendChild(p2);
+  p.appendChild(i);
+  p.appendChild(a);
+
+  
+});
+</script>-->
+
+            
+<br><br>
+        <br><br>
+              
+  </div>
+        
+        
+  </div>
+
+    <br><br>
+
+    <div class="section">
+
+    </div>
+
+        <div class="row center">
+            <img src="images/CC-Logo.png" height="40" width="120">
+            </div>
+  <footer class="page-footer light-green darken-1">
+    <div class="footer-copyright">
+      <div class="container">
+    CountryCart Copyright © 2017. <br>Style by Materialize.
+      </div>
+    </div>
+  </footer>
+
+
+  </body>
+</html>
