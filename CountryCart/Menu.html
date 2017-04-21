@@ -171,33 +171,41 @@
         <br>
             <br><br>
 <div id="set" class="col c6 m4 l6 container center"> 
-            <h5></h5>
+            <h5 id="pageTitle"></h5>
             <br>
-            <h6></h6>
 </div>
 <div class="col c6 m4 l6 container">
-    <ul id="list1" class= "collapsible blue lighten-1" data-collapsible="accordion">
+    <ul id="list1" class= "collapsible green lighten-1" data-collapsible="accordion">
    </ul>
-       <ul id="list2" class= "collapsible blue lighten-1" data-collapsible="accordion">
+       <ul id="list2" class= "collapsible green lighten-1" data-collapsible="accordion">
    </ul>
-       <ul id="list3" class= "collapsible blue lighten-1" data-collapsible="accordion">
+       <ul id="list3" class= "collapsible green lighten-1" data-collapsible="accordion">
    </ul>
 </div>
 <script>
   //db
-  var storage = firebase.storage();
-  var storageRef = storage.ref();   
-  database = firebase.database();
+  var database = firebase.database();
   var shopListRef  = database.ref('shoplist');
   var companyRef = shopListRef.child('company');
   var set = document.getElementById("set");
-  var pageTitle = document.createElement('h5');
-  var pageSubTitle = document.createElement('img');
-  var img = storageRef.child('logos/farmco');
+  var storage = firebase.app().storage("gs://countrycart-b276a.appspot.com");
+  // Points to the root reference
+var storageRef = storage.ref('logos');
+
+storageRef.child('farmco.png').getDownloadURL().then(function(url) {
+  // Get the download URL for 'images/stars.jpg'
+  // This can be inserted into an <img> tag
+  var img = document.createElement('img');
+  img.setAttribute('src', url);
+  img.setAttribute('style', 'width:120px; height:120px');
+  img.setAttribute('class', 'col c6 m4 l6');
+  set.appendChild(img);
+}).catch(function(error) {
+  console.error(error);
+});
+  var pageTitle = document.getElementById('pageTitle');
   pageTitle.innerText = companyRef.child("Farmco").key;
-  pageSubTitle.setAttribute("src", img);
-  set.appendChild(pageTitle);
-  set.appendChild(pageSubTitle);
+
   var list1 = document.getElementById("list1");
   var list2 = document.getElementById("list2");
   var list3 = document.getElementById("list3");
@@ -228,9 +236,9 @@
   var br1 = document.createElement('br');
   var br2 = document.createElement('br');
   var br3 = document.createElement('br');
-  div1.setAttribute("class", "collapsible-header blue lighten-1");
-  div2.setAttribute("class", "collapsible-header blue lighten-1");
-  div3.setAttribute("class", "collapsible-header blue lighten-1");
+  div1.setAttribute("class", "collapsible-header green lighten-1");
+  div2.setAttribute("class", "collapsible-header green lighten-1");
+  div3.setAttribute("class", "collapsible-header green lighten-1");
   div201.setAttribute("class", "collapsible-body white");
   div202.setAttribute("class", "collapsible-body white");
   div203.setAttribute("class", "collapsible-body white");
