@@ -175,19 +175,12 @@
             <br>
             <h6></h6>
 </div>
-<div id="items">
-    <ul data-collapsible="accordion">
-     <li>
-        <div>
-            <h5></h5>
-        </div>
-        <div>
-        <li><a></a></li>
-                <div>
-                </div>
-                <br>
-        </div>
-    </li>
+<div class="col c6 m4 l6 container">
+    <ul id="list1" class= "collapsible blue lighten-1" data-collapsible="accordion">
+   </ul>
+       <ul id="list2" class= "collapsible blue lighten-1" data-collapsible="accordion">
+   </ul>
+       <ul id="list3" class= "collapsible blue lighten-1" data-collapsible="accordion">
    </ul>
 </div>
 <script>
@@ -200,45 +193,107 @@
   var set = document.getElementById("set");
   var pageTitle = document.createElement('h5');
   var pageSubTitle = document.createElement('img');
-  var img = storageRef.child('logos/' +companyRef.child.key+ '.png');
+  var img = storageRef.child('logos/farmco');
   pageTitle.innerText = companyRef.child("Farmco").key;
   pageSubTitle.setAttribute("src", img);
   set.appendChild(pageTitle);
   set.appendChild(pageSubTitle);
-  var items = document.getElementById("items");
-  var ul = document.createElement('ul');
-  var li = document.createElement('li');
+  var list1 = document.getElementById("list1");
+  var list2 = document.getElementById("list2");
+  var list3 = document.getElementById("list3");
+  var li1 = document.createElement('li');
+  var li2 = document.createElement('li');
   var li3 = document.createElement('li');
-  var div = document.createElement('div');
+  var li201 = document.createElement('li');
+  var li202 = document.createElement('li');
+  var li203 = document.createElement('li');
   var div1 = document.createElement('div');
-  var h5 = document.createElement('h5');
-  var a = document.createElement('a');
-  var br = document.createElement('br');
   var div2 = document.createElement('div');
-  div.setAttribute("class", "collapsible-header blue lighten-1");
-  div1.setAttribute("class", "collapsible-body white");
-  h5.setAttribute("class", "white-text");
-  ul.setAttribute("class", "collapsible blue lighten-1");
-  ul.setAttribute("data-collapsible", "accordion");
-  div2.setAttribute("class", "input-field col s6");
+  var div3 = document.createElement('div');
+  var div201 = document.createElement('div');
+  var div202 = document.createElement('div');
+  var div203 = document.createElement('div');
+  var h501 = document.createElement('h5');
+  var h502 = document.createElement('h5');
+  var h503 = document.createElement('h5');
+  var p1 = document.createElement('p');
+  var p2 = document.createElement('p');
+  var p3 = document.createElement('p');
+    var p4 = document.createElement('p');
+  var p5 = document.createElement('p');
+  var p6 = document.createElement('p');
+    var p7 = document.createElement('p');
+  var p8 = document.createElement('p');
+  var p9 = document.createElement('p');
+  var br1 = document.createElement('br');
+  var br2 = document.createElement('br');
+  var br3 = document.createElement('br');
+  div1.setAttribute("class", "collapsible-header blue lighten-1");
+  div2.setAttribute("class", "collapsible-header blue lighten-1");
+  div3.setAttribute("class", "collapsible-header blue lighten-1");
+  div201.setAttribute("class", "collapsible-body white");
+  div202.setAttribute("class", "collapsible-body white");
+  div203.setAttribute("class", "collapsible-body white");
+  h501.setAttribute("class", "white-text");
+  h502.setAttribute("class", "white-text");
+  h503.setAttribute("class", "white-text");
   var newItems = true;
-  var itemsList  = database.ref('shoplist/company/Farmco/menu');
-  itemsList.once('child_added', function(child) {
-  if (!newItems) return;
-  var menuItem = child.key;
-  h5.innerText = menuItem; 
-  var itemName = menuItem;
-  a.innerText = itemName.key;
-  items.appendChild(ul);
-  ul.appendChild(li);
-  li.appendChild(div);
-  li.appendChild(div1);
-  div.appendChild(h5);
-  div1.appendChild(li3);
-  li3.appendChild(a);
-  div1.appendChild(div2);
-  div1.appendChild(br);
+  var itemsList  = database.ref('shoplist/company/Farmco/');
+  var itemsList2  = itemsList.child('menu');
+  var itemsList3  = itemsList2.child('dairy');
+  var itemsList4  = itemsList2.child('fruit');
+  var itemsList5  = itemsList2.child('vegetables');
+
+  itemsList3.on('value', function(snapshot) {
+  h501.innerText = snapshot.key;
+  p1.innerText = snapshot.val()[1]; 
+  p2.innerText = snapshot.val()[2]; 
+  p3.innerText = snapshot.val()[3]; 
   });
+    itemsList4.on('value', function(snapshot) {
+  h502.innerText = snapshot.key;
+  p4.innerText = snapshot.val()[1]; 
+  p5.innerText = snapshot.val()[2]; 
+  p6.innerText = snapshot.val()[3]; 
+  });
+    itemsList5.on('value', function(snapshot) {
+  h503.innerText = snapshot.key;
+  p7.innerText = snapshot.val()[1]; 
+  p8.innerText = snapshot.val()[2]; 
+  p9.innerText = snapshot.val()[3]; 
+  });
+
+  
+  list1.appendChild(li1);
+  li1.appendChild(div1);
+  li1.appendChild(div201);
+  div1.appendChild(h501);
+  div201.appendChild(li201);
+  li201.appendChild(p1);
+  li201.appendChild(p2);
+  li201.appendChild(p3);
+  div201.appendChild(br1);
+
+  list2.appendChild(li2);
+  li2.appendChild(div2);
+  li2.appendChild(div202);
+  div2.appendChild(h502);
+  div202.appendChild(li202);
+  li202.appendChild(p4);
+  li202.appendChild(p5);
+  li202.appendChild(p6);
+  div202.appendChild(br2);
+    
+  list3.appendChild(li3);
+  li3.appendChild(div3);
+  li3.appendChild(div203);
+  div3.appendChild(h503);
+  div203.appendChild(li203);
+  li203.appendChild(p7);
+  li203.appendChild(p8);
+  li203.appendChild(p9);
+  div203.appendChild(br3);
+  
 
   
 </script>
@@ -250,7 +305,6 @@
     </div>
 
 
-    </div>
     <br><br>
     <div class="section">
     </div>
