@@ -6,8 +6,11 @@
     <meta charset="utf-8">
     <title>CountryCart</title>
     <!--  Scripts-->
-    <script src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.0.min.js">
+        
+    </script>
     <script src="js/materialize.js"></script>
+    <script src="js/paypal-button.min.js"></script>
     <script src="js/init.js"></script>
     <!-- CSS  -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -32,6 +35,13 @@
       }
 
 </script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/minicart/3.0.6/minicart.min.js"></script>
+<script>
+    paypal.minicart.render(config);
+</script>
+
+
 <body>
     <nav class="deep-purple lighten-1" role="navigation">
         <div class="nav-wrapper container">
@@ -171,7 +181,7 @@
         <br>
             <br><br>
 <div id="set" class="col c6 m4 l6 container center"> 
-            <h5 id="pageTitle"></h5>
+            <h4 id="pageTitle"></h4>
             <br>
 </div>
 <div class="col c6 m4 l6 container">
@@ -306,10 +316,68 @@ storageRef.child('farmco.png').getDownloadURL().then(function(url) {
   
 </script>
 
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+        <input type="hidden" name="cmd" value="_cart" />
+        <input type="hidden" name="add" value="1" />
+        <input type="hidden" name="business" value="example@minicartjs.com" />
+        <input type="hidden" name="item_name" value="Test Product 1" />
+        <input type="hidden" name="quantity" value="1" />
+        <input type="hidden" name="amount" value="1.00" />
+        <input type="hidden" name="currency_code" value="USD" />
+        <input type="hidden" name="shipping" value="1.00">
+        <strong>Test Product 1</strong>
+        <input type="submit" name="submit" value="Add to cart" class="btn blue lighten-1 waves-effect waves-light" />
+    </form>
+    <br>
+    <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+        <input type="hidden" name="cmd" value="_cart" />
+        <input type="hidden" name="add" value="4" />
+        <input type="hidden" name="business" value="example@minicartjs.com" />
+        <input type="hidden" name="item_name" value="Test Product 2" />
+        <input type="hidden" name="quantity" value="1" />
+        <input type="hidden" name="amount" value="2.00" />
+        <input type="hidden" name="currency_code" value="USD" />
+        <input type="hidden" name="shipping" value="1.00">
+        <strong>Test Product 2</strong>
+        <input type="submit" name="submit" value="Add to cart" class="btn blue lighten-1 waves-effect waves-light" />
+    </form>
+    <br>
+    <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+        <input type="hidden" name="cmd" value="_cart" />
+        <input type="hidden" name="add" value="2" />
+        <input type="hidden" name="business" value="example@minicartjs.com" />
+        <input type="hidden" name="item_name" value="Test Product 3" />
+        <input type="hidden" name="quantity" value="1" />
+        <input type="hidden" name="amount" value="4.00" />
+        <input type="hidden" name="currency_code" value="USD" />
+        <input type="hidden" name="shipping" value="1.00">
+        <strong>Test Product 3</strong>
+        <input type="submit" name="submit" value="Add to cart" class="btn blue lighten-1 waves-effect waves-light" />
+    </form>
+    <br>
+
+
+
+    <script src="js/minicart.js"></script>
+    <script>
+        paypal.minicart.render();
+        paypal.minicart.cart.on('checkout', function (evt) {
+        	var items, len, i;
+        	if (this.subtotal() > 0) {
+        		items = this.items();
+        		for (i = 0, len = items.length; i < len; i++) {
+        			items[i].set('shipping', 0);
+        			items[i].set('shipping2', 0);
+        		}
+        	}
+        });
+    </script>
+
 
     <br><br>
     <br><br>
 
+    </div>
     </div>
 
 
