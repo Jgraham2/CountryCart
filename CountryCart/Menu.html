@@ -92,8 +92,8 @@
         firebase.auth().onAuthStateChanged(function(user) {
           if (user) {
             // User is signed in.
-              var strMessage1 = document.getElementById("message") ;
-              strMessage1.innerHTML = '<h5> Hi, ' + user.displayName + '.</h5>'
+            var strMessage1 = document.getElementById("message") ;
+            strMessage1.innerHTML = '<h5> Hi, ' + user.displayName + '.</h5>'
             var displayName = user.displayName;
             var email = user.email;
             var emailVerified = user.emailVerified;
@@ -205,8 +205,7 @@
       complete: function() { alert('Closed'); } // Callback for Modal close
     }
   );
-  });
-          
+  });          
 
   //db
   var database = firebase.database();
@@ -251,7 +250,7 @@ storageRef.child('farmco.png').getDownloadURL().then(function(url) {
   var input106 = document.createElement('input');
   var input107 = document.createElement('input');
   var input108 = document.createElement('input');
-  var input109 = document.createElement('input');
+  var input109 = document.createElement('button');
   var input201 = document.createElement('input');
   var input202 = document.createElement('input');
   var input203 = document.createElement('input');
@@ -260,7 +259,7 @@ storageRef.child('farmco.png').getDownloadURL().then(function(url) {
   var input206 = document.createElement('input');
   var input207 = document.createElement('input');
   var input208 = document.createElement('input');
-  var input209 = document.createElement('input');
+  var input209 = document.createElement('button');
   var input301 = document.createElement('input');
   var input302 = document.createElement('input');
   var input303 = document.createElement('input');
@@ -269,7 +268,7 @@ storageRef.child('farmco.png').getDownloadURL().then(function(url) {
   var input306 = document.createElement('input');
   var input307 = document.createElement('input');
   var input308 = document.createElement('input');
-  var input309 = document.createElement('input'); 
+  var input309 = document.createElement('button'); 
   var input401 = document.createElement('input');
   var input402 = document.createElement('input');
   var input403 = document.createElement('input');
@@ -278,7 +277,7 @@ storageRef.child('farmco.png').getDownloadURL().then(function(url) {
   var input406 = document.createElement('input');
   var input407 = document.createElement('input');
   var input408 = document.createElement('input');
-  var input409 = document.createElement('input');
+  var input409 = document.createElement('button');
   var input501 = document.createElement('input');
   var input502 = document.createElement('input');
   var input503 = document.createElement('input');
@@ -287,7 +286,7 @@ storageRef.child('farmco.png').getDownloadURL().then(function(url) {
   var input506 = document.createElement('input');
   var input507 = document.createElement('input');
   var input508 = document.createElement('input');
-  var input509 = document.createElement('input');
+  var input509 = document.createElement('button');
   var input601 = document.createElement('input');
   var input602 = document.createElement('input');
   var input603 = document.createElement('input');
@@ -296,7 +295,7 @@ storageRef.child('farmco.png').getDownloadURL().then(function(url) {
   var input606 = document.createElement('input');
   var input607 = document.createElement('input');
   var input608 = document.createElement('input');
-  var input609 = document.createElement('input'); 
+  var input609 = document.createElement('button'); 
   var input701 = document.createElement('input');
   var input702 = document.createElement('input');
   var input703 = document.createElement('input');
@@ -305,7 +304,7 @@ storageRef.child('farmco.png').getDownloadURL().then(function(url) {
   var input706 = document.createElement('input');
   var input707 = document.createElement('input');
   var input708 = document.createElement('input');
-  var input709 = document.createElement('input');
+  var input709 = document.createElement('button');
   var input801 = document.createElement('input');
   var input802 = document.createElement('input');
   var input803 = document.createElement('input');
@@ -314,7 +313,7 @@ storageRef.child('farmco.png').getDownloadURL().then(function(url) {
   var input806 = document.createElement('input');
   var input807 = document.createElement('input');
   var input808 = document.createElement('input');
-  var input809 = document.createElement('input');
+  var input809 = document.createElement('button');
   var input901 = document.createElement('input');
   var input902 = document.createElement('input');
   var input903 = document.createElement('input');
@@ -323,7 +322,7 @@ storageRef.child('farmco.png').getDownloadURL().then(function(url) {
   var input906 = document.createElement('input');
   var input907 = document.createElement('input');
   var input908 = document.createElement('input');
-  var input909 = document.createElement('input'); 
+  var input909 = document.createElement('button'); 
   var li1 = document.createElement('li');
   var li2 = document.createElement('li');
   var li3 = document.createElement('li');
@@ -361,6 +360,7 @@ storageRef.child('farmco.png').getDownloadURL().then(function(url) {
   div2.setAttribute("class", "collapsible-header green lighten-1");
   div3.setAttribute("class", "collapsible-header green lighten-1");
   div201.setAttribute("class", "collapsible-body white");
+  div201.setAttribute("style", "z-index: -5;")
   div202.setAttribute("class", "collapsible-body white");
   div203.setAttribute("class", "collapsible-body white");
   h501.setAttribute("class", "white-text");
@@ -369,6 +369,7 @@ storageRef.child('farmco.png').getDownloadURL().then(function(url) {
   h501.setAttribute("style", "text-transform: capitalize;");
   h502.setAttribute("style", "text-transform: capitalize;");
   h503.setAttribute("style", "text-transform: capitalize;");
+  li201.setAttribute("style", "z-index: -4;")
   p1.setAttribute("style", "font-size:120%; text-transform: capitalize;");
   p2.setAttribute("style", "font-size:120%; text-transform: capitalize;"); 
   p3.setAttribute("style", "font-size:120%; text-transform: capitalize;"); 
@@ -377,10 +378,11 @@ storageRef.child('farmco.png').getDownloadURL().then(function(url) {
   p6.setAttribute("style", "font-size:120%; text-transform: capitalize;"); 
   p7.setAttribute("style", "font-size:120%; text-transform: capitalize;"); 
   p8.setAttribute("style", "font-size:120%; text-transform: capitalize;"); 
-  p9.setAttribute("style", "font-size:120%; text-transform: capitalize;");  
+  p9.setAttribute("style", "font-size:120%; text-transform: capitalize; z-index: -3;");  
 
   form1.setAttribute("action", "https://www.paypal.com/cgi-bin/webscr"); 
   form1.setAttribute("method","post");
+  form1.setAttribute("style", "z-index: -2;")
   form2.setAttribute("action", "https://www.paypal.com/cgi-bin/webscr"); 
   form2.setAttribute("method","post");
   form3.setAttribute("action", "https://www.paypal.com/cgi-bin/webscr"); 
@@ -426,7 +428,8 @@ storageRef.child('farmco.png').getDownloadURL().then(function(url) {
   input109.setAttribute("name", "submit");
   input109.setAttribute("value", "Add To Cart");
   input109.setAttribute("class", "btn blue lighten-1 waves-effect waves-light right");
-  input109.setAttribute("onclick", "evt()");
+  input109.setAttribute("style", "z-index:auto;");
+  input109.innerText = "+";
 
   input201.setAttribute("type", "hidden");
   input201.setAttribute("name", "cmd");
@@ -456,6 +459,8 @@ storageRef.child('farmco.png').getDownloadURL().then(function(url) {
   input209.setAttribute("name", "submit");
   input209.setAttribute("value", "Add To Cart");
   input209.setAttribute("class", "btn blue lighten-1 waves-effect waves-light right");
+  input209.setAttribute("style", "z-index:auto;");
+  input209.innerText = "+";
 
   input301.setAttribute("type", "hidden");
   input301.setAttribute("name", "cmd");
@@ -485,6 +490,8 @@ storageRef.child('farmco.png').getDownloadURL().then(function(url) {
   input309.setAttribute("name", "submit");
   input309.setAttribute("value", "Add To Cart");
   input309.setAttribute("class", "btn blue lighten-1 waves-effect waves-light right");
+  input309.setAttribute("style", "z-index:auto;");
+  input309.innerText = "+";
 
   input401.setAttribute("type", "hidden");
   input401.setAttribute("name", "cmd");
@@ -514,6 +521,8 @@ storageRef.child('farmco.png').getDownloadURL().then(function(url) {
   input409.setAttribute("name", "submit");
   input409.setAttribute("value", "Add To Cart");
   input409.setAttribute("class", "btn blue lighten-1 waves-effect waves-light right");
+  input409.setAttribute("style", "z-index:auto;");
+  input409.innerText = "+";
 
   input501.setAttribute("type", "hidden");
   input501.setAttribute("name", "cmd");
@@ -543,6 +552,8 @@ storageRef.child('farmco.png').getDownloadURL().then(function(url) {
   input509.setAttribute("name", "submit");
   input509.setAttribute("value", "Add To Cart");
   input509.setAttribute("class", "btn blue lighten-1 waves-effect waves-light right");
+  input509.setAttribute("style", "z-index:auto;");
+  input509.innerText = "+";
 
   input601.setAttribute("type", "hidden");
   input601.setAttribute("name", "cmd");
@@ -572,6 +583,8 @@ storageRef.child('farmco.png').getDownloadURL().then(function(url) {
   input609.setAttribute("name", "submit");
   input609.setAttribute("value", "Add To Cart");
   input609.setAttribute("class", "btn blue lighten-1 waves-effect waves-light right");
+  input609.setAttribute("style", "z-index:auto;");
+  input609.innerText = "+";
 
   input701.setAttribute("type", "hidden");
   input701.setAttribute("name", "cmd");
@@ -601,6 +614,8 @@ storageRef.child('farmco.png').getDownloadURL().then(function(url) {
   input709.setAttribute("name", "submit");
   input709.setAttribute("value", "Add To Cart");
   input709.setAttribute("class", "btn blue lighten-1 waves-effect waves-light right");
+  input709.setAttribute("style", "z-index:auto;");
+  input709.innerText = "+";
 
   input801.setAttribute("type", "hidden");
   input801.setAttribute("name", "cmd");
@@ -630,6 +645,8 @@ storageRef.child('farmco.png').getDownloadURL().then(function(url) {
   input809.setAttribute("name", "submit");
   input809.setAttribute("value", "Add To Cart");
   input809.setAttribute("class", "btn blue lighten-1 waves-effect waves-light right");
+  input809.setAttribute("style", "z-index:auto;");
+  input809.innerText = "+";
 
   input901.setAttribute("type", "hidden");
   input901.setAttribute("name", "cmd");
