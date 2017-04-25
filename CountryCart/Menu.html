@@ -36,11 +36,6 @@
 
 </script>
 
-<script src="//cdnjs.cloudflare.com/ajax/libs/minicart/3.0.6/minicart.min.js"></script>
-<script>
-    paypal.minicart.render(config);
-</script>
-
 
 <body>
     <nav class="deep-purple lighten-1" role="navigation">
@@ -193,6 +188,26 @@
    </ul>
 </div>
 <script>
+
+  $(document).ready(function(){
+    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+    $('.modal').modal({
+      dismissible: true, // Modal can be dismissed by clicking outside of the modal
+      opacity: .5, // Opacity of modal background
+      inDuration: 300, // Transition in duration
+      outDuration: 200, // Transition out duration
+      startingTop: '4%', // Starting top style attribute
+      endingTop: '10%', // Ending top style attribute
+      ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
+        alert("Ready");
+        console.log(modal, trigger);
+      },
+      complete: function() { alert('Closed'); } // Callback for Modal close
+    }
+  );
+  });
+          
+
   //db
   var database = firebase.database();
   var shopListRef  = database.ref('shoplist');
@@ -411,6 +426,7 @@ storageRef.child('farmco.png').getDownloadURL().then(function(url) {
   input109.setAttribute("name", "submit");
   input109.setAttribute("value", "Add To Cart");
   input109.setAttribute("class", "btn blue lighten-1 waves-effect waves-light right");
+  input109.setAttribute("onclick", "evt()");
 
   input201.setAttribute("type", "hidden");
   input201.setAttribute("name", "cmd");
@@ -800,19 +816,11 @@ storageRef.child('farmco.png').getDownloadURL().then(function(url) {
 </script>
     <br>
 
-    <script src="js/minicart.js"></script>
+    <script src="js/minicart.js">
+    </script>
     <script>
         paypal.minicart.render();
-        paypal.minicart.cart.on('checkout', function (evt) {
-        	var items, len, i;
-        	if (this.subtotal() > 0) {
-        		items = this.items();
-        		for (i = 0, len = items.length; i < len; i++) {
-        			items[i].set('shipping', 0);
-        			items[i].set('shipping2', 0);
-        		}
-        	}
-        });
+
     </script>
 
 
