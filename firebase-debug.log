@@ -3,7 +3,7 @@
 [debug] CLI Version:  3.6.1
 [debug] Platform:     darwin
 [debug] Node Version: v6.0.0
-[debug] Time:         Tue Apr 25 2017 11:22:09 GMT+0100 (BST)
+[debug] Time:         Tue Apr 25 2017 13:42:22 GMT+0100 (BST)
 [debug] ----------------------------------------------------------------------
 [debug] 
 [debug] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
@@ -13,22 +13,22 @@
   client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
   grant_type: 'refresh_token',
   scope: 'email https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
- Tue Apr 25 2017 11:22:09 GMT+0100 (BST)
+ Tue Apr 25 2017 13:42:22 GMT+0100 (BST)
 [debug] <<< HTTP RESPONSE 200
 [debug] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/countrycart-b276a  
- Tue Apr 25 2017 11:22:11 GMT+0100 (BST)
+ Tue Apr 25 2017 13:42:22 GMT+0100 (BST)
 [debug] <<< HTTP RESPONSE 200
 [debug] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/countrycart-b276a/tokens  
- Tue Apr 25 2017 11:22:12 GMT+0100 (BST)
+ Tue Apr 25 2017 13:42:23 GMT+0100 (BST)
 [debug] <<< HTTP RESPONSE 200
 [info] Starting Firebase development server...
 [info] 
 [info] Project Directory: /Users/justing/workspace/CountryCartApp/cc-webapp
 [debug] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/countrycart-b276a  
- Tue Apr 25 2017 11:22:13 GMT+0100 (BST)
+ Tue Apr 25 2017 13:42:24 GMT+0100 (BST)
 [debug] <<< HTTP RESPONSE 200
 [debug] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/717738134028/clients/_:getWebAppConfig  
- Tue Apr 25 2017 11:22:13 GMT+0100 (BST)
+ Tue Apr 25 2017 13:42:25 GMT+0100 (BST)
 [debug] <<< HTTP RESPONSE 200
 [info] Public Directory: CountryCart
 [info] 
