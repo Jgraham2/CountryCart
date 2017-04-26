@@ -131,47 +131,47 @@
         <br> <br>
       <div class="col c6 m4 l6 container">
 
-      <h3>Submit a Talk</h3>
+      <h3>Add A Product</h3>
 
-      <form id="recommendationForm">
+      <form id="addItemForm">
         <div class="form-group">
-          <label for="talkTitle">Title</label>
-          <input class="form-control" id="talkTitle" placeholder="Title of the talk">
+          <label for="productName">Product</label>
+          <input type="text" class="form-control" id="productName" placeholder="Name of Product">
         </div>
 
         <div class="form-group">
-          <label for="talkPresenter">Presenter</label>
-          <input class="form-control" id="talkPresenter" placeholder="Name of the presenter">
+          <label for="productCategory">Category</label>
+          <input type="text" class="form-control" id="productCategory" placeholder="e.g Fish, Bread or Magazines.">
         </div>
 
         <div class="form-group">
-          <label for="talkLink">Link</label>
-          <input type="url" class="form-control" id="talkLink" placeholder="Link to a recording of the talk">
+          <label for="productPrice">Price (£)</label>
+          <input type="number" min="0.01" step="0.01" max="2500"  class="form-control" id="productPrice" placeholder="0.00">
         </div>
 
         <!-- When you click this button, trigger the submit event on this form. -->
-        <button type="submit" class="btn btn-default">Submit</button>
+        <button type="submit" class="btn purple lighten-1 btn-default">Submit</button>
       </form>
       <br>
     </div>
     <br>
 
-    <h3>Last Talk Proposed</h3>
+    <h3>Your Products</h3>
 
       <table class="table table-striped">
         <thead>
           <tr>
-            <th>Title</th>
-            <th>Presenter</th>
-            <th>Link</th>
+            <th>Product</th>
+            <th>Category</th>
+            <th>Price (£)</th>
           </tr>
         </thead>
         <tbody  id="table">
           <tr>
             <!-- This is empty for now, but it will be filled out by an event handler in application.js with the most recent recommendation data from Firebase. -->
-            <td id="title"></td>
-            <td id="presenter"></td>
-            <td id="link"></td>
+            <td id="itemName"></td>
+            <td id="itemCat"></td>
+            <td id="itemPrice"></td>
           </tr>
         </tbody>
       </table>
@@ -193,18 +193,18 @@
       var addRef = firebase.database().ref('shoplist/company/Farmco/menu');
 
         // Save a new recommendation to the database, using the input in the form
-      var submitRecommendation = function () {
+      var submitProduct = function () {
 
   // Get input values from each of the form elements
-  var title = $("#talkTitle").val();
-  var presenter = $("#talkPresenter").val();
-  var link = $("#talkLink").val();
+  var name = $("#productName").val();
+  var category = $("#productCategory").val();
+  var price = $("#productPrice").val();
 
   // Push a new recommendation to the database using those values
   addRef.push({
-    "title": title,
-    "presenter": presenter,
-    "link": link
+    "name": name,
+    "category": category,
+    "price": price
   });
 };
 var list = document.getElementById("table");
@@ -217,23 +217,21 @@ addRef.on('child_added', function(childSnapshot) {
   // added to the recommendations list in Firebase
 
   var tr = document.createElement('tr');
-  var tdTitle = document.createElement('td');
-  tdTitle.setAttribute("id", "title");
-  var tdPresenter = document.createElement('td');
-  tdPresenter.setAttribute("id", "presenter");
-  var tdLink = document.createElement('td');
-  tdLink.setAttribute("id", "link");
+  var tdName = document.createElement('td');
+  tdName.setAttribute("id", "title");
+  var tdCat = document.createElement('td');
+  tdCat.setAttribute("id", "presenter");
+  var tdPrice = document.createElement('td');
+  tdPrice.setAttribute("id", "link");
   
-  
-  tdTitle.innerText = childSnapshot.val().title;
-  tdPresenter.innerText = childSnapshot.val().presenter;
-  tdLink.innerText = childSnapshot.val().link;
-
+  tdName.innerText = childSnapshot.val().name;
+  tdCat.innerText = childSnapshot.val().category;
+  tdPrice.innerText = childSnapshot.val().price;
 
   table.appendChild(tr);
-  tr.appendChild(tdTitle);
-  tr.appendChild(tdPresenter);
-  tr.appendChild(tdLink);
+  tr.appendChild(tdName);
+  tr.appendChild(tdCat);
+  tr.appendChild(tdPrice);
 
 });
 
@@ -246,7 +244,7 @@ $(window).on('load', function(){
 
   // Find the HTML element with the id recommendationForm, and when the submit
   // event is triggered on that element, call submitRecommendation.
-  $("#recommendationForm").submit(submitRecommendation);
+  $("#addItemForm").submit(submitProduct);
 
 });
 
