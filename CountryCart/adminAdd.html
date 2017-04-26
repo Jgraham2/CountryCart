@@ -1,0 +1,218 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta charset="utf-8">
+  <title>CountryCart</title>
+
+    <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
+  <script src="js/materialize.js"></script>
+  <script src="js/init.js"></script>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+    <script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>
+<script>
+
+             // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyBhoPjNeZvo62IrIfi7GHARENckSZaoXGk",
+        authDomain: "countrycart-b276a.firebaseapp.com",
+        databaseURL: "https://countrycart-b276a.firebaseio.com",
+        storageBucket: "countrycart-b276a.appspot.com",
+        messagingSenderId: "717738134028"
+      };
+      firebase.initializeApp(config);
+
+
+
+  </script>
+<body>
+  <nav class="red lighten-1" role="navigation">
+    <div class="nav-wrapper container" >       
+    <img class="logo center hide-on-med-and-down" src="images/whitearrows.png" height="42" width="42" align="center" alt="logo">
+        <a id="logo-container" class="brand-logo"></a> 
+<!-- Icon made by Baianat from www.flaticon.com  -->
+      <ul class="right hide-on-med-and-down">
+        <li><a href="#"></a></li>
+          <li class="tab col s3"><a href="index.html">Home</a></li>
+          <li class="tab col s3"><a href="about.html">About</a></li>
+          <li class="tab col s3"><a id="sign-in" onclick="signout()"></a></li>
+      </ul>
+
+      <ul id="nav-mobile" class="side-nav" >
+      <div class="circle center">
+        <img src="images/CC-Logo.png" height="85" width="85" align="center" >
+        <img src="images/cclogotxt.png"  height="80" width="100" align="center">
+      </div>
+      <li><div class="divider"></div></li>
+          <li class="tab col s3"><a href="index.html">Home</a></li>
+          <li class="tab col s3"><a href="about.html">About</a></li>
+          <li class="tab col s3"><a id="sign-in-mob" onclick="signout()"></a></li>
+          <li><div class="divider"></div></li>
+      <li><a href="#!">First Sidebar Link</a></li>
+      <li><a href="#!">Second Sidebar Link</a></li>
+      <li class="no-padding">
+        <ul class="collapsible collapsible-accordion">
+          <li>
+            <a class="collapsible-header">Dropdown<i class="material-icons">arrow_drop_down</i></a>
+            <div class="collapsible-body">
+              <ul>
+                <li><a href="#!">First</a></li>
+                <li><a href="#!">Second</a></li>
+                <li><a href="#!">Third</a></li>
+                <li><a href="#!">Fourth</a></li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </li>
+      </ul>
+        <a href="#" data-activates="nav-mobile" class="button-collapse left"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+  <div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+      
+        <script type="text/javascript">
+      initApp = function() {
+        firebase.auth().onAuthStateChanged(function(user) {
+          if (user) {
+            // User is signed in.
+              var strMessage1 = document.getElementById("message") ;
+              strMessage1.innerHTML = '<h5> Hello, ' + user.displayName + '.</h5>'
+            var displayName = user.displayName;
+            var email = user.email;
+            var emailVerified = user.emailVerified;
+            var photoURL = user.photoURL;
+            var uid = user.uid;
+            var providerData = user.providerData;
+            user.getToken().then(function(accessToken) {
+              document.getElementById('sign-in-status').textContent = 'Signed in as an Admin.' ;
+              document.getElementById('sign-in').textContent = 'Sign out';
+              document.getElementById('sign-in-mob').href = "login.html"
+              document.getElementById('sign-in').href = "login.html"
+              document.getElementById('sign-in-mob').textContent = 'Sign out';
+/*              document.getElementById('account-details').textContent = JSON.stringify({
+                displayName: displayName,
+                email: email,
+                emailVerified: emailVerified,
+                photoURL: photoURL,
+                uid: uid,
+                accessToken: accessToken,
+                providerData: providerData
+              }, null, '  ');*/
+            });
+          } else {
+            // User is signed out.
+            document.getElementById('sign-in-status').textContent = 'viewing as a Admin.';
+            document.getElementById('sign-in').textContent = 'Sign in';
+            document.getElementById('sign-in-mob').href = "login.html"
+            document.getElementById('sign-in-mob').textContent = 'Sign out';
+            document.getElementById('sign-in').href = "login.html"
+            //document.getElementById('account-details').textContent = 'null';
+          }
+        }, function(error) {
+          console.log(error);
+        });
+      };
+      window.addEventListener('load', function() {
+        initApp()
+      });
+    
+        signout = function() {
+            firebase.auth().signOut().then(function() {
+            console.log('Signed Out');
+            }, function(error) {
+            console.error('Sign Out Error', error);
+            });
+        };
+    </script>
+
+    
+    <h5 id="message">Welcome, </h5>
+        <div>
+            <p class="left">You are <a id="sign-in-status"></a> </p>
+
+        </div>
+        <br>
+      <div class="col c6 m4 l6 container">
+
+<h4 class="center"> Add New Product </h4>
+<div class="row">
+  <form class="col s12" id="form">
+    
+      <div class="input-field col s12">
+        <input placeholder="Product Name" id="form__name" type="text" name="name">
+        <label for="form__name">Product</label>
+      </div>
+      <div class="input-field col s12">
+        <input placeholder="i.e Fruit, Bread, Magazines." id="form__category" type="text" name="category">
+        <label for="form__category">Category</label>
+      </div>
+      <div class="input-field col s12">
+        <input placeholder="0.00" id="form__price" type="number" min="0.01" step="0.01" max="2500" name="price">
+        <label for="form__price">Price (£)</label>
+      </div>
+    <!--<div class="row">
+          <div class="input-field col s12">
+            <textarea id="description" class="materialize-textarea" length="140"></textarea>
+            <label for="description">Describe your Item</label>
+          </div>
+        </div>-->
+        <input type="submit" value="Send">
+  </form>
+</div>
+
+        <script src="https://cdn.firebase.com/js/client/2.0.6/firebase.js"></script>
+        <script src="https://code.jquery.com/jquery-1.11.2.js"></script>
+
+        <script>
+        var submissionsRef = new Firebase('https://countrycart-b276a.firebaseio.com/shoplist/company/Farmco/menu');
+
+        var $form = $('#form');
+        $form.submit(function(event) {
+            event.preventDefault();
+
+            // Firebase generates random id when pushed
+            var data = $form.serializeArray();
+            submissionsRef.push(data, function(err) {
+                if (err) {
+                    window.alert('Error when submitting data: ' + err.message);
+                }
+            });
+
+            window.alert('Submitted answers: \n' + JSON.stringify(data, null, 2));
+            $form[0].reset();
+        });
+        </script>
+
+      </div>
+
+<br>
+
+    <br><br>
+
+    <div class="section">
+
+    </div>
+
+        <div class="row center">
+            <img src="images/CC-Logo.png" height="40" width="120">
+            </div>
+  <footer class="page-footer light-green darken-1">
+    <div class="footer-copyright">
+      <div class="container">
+    CountryCart Copyright © 2017. <br>Style by Materialize.
+      </div>
+    </div>
+  </footer>
+
+
+  </body>
+</html>

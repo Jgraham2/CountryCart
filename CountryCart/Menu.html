@@ -168,7 +168,7 @@
             </ul>
             <a href="#" data-activates="slide-out" class="button-collapse right"><i class="material-icons">dashboard</i></a>
 
-<br>
+<br><br>
 
         <div>
             <p class="left">You are <a id="sign-in-status"></a> </p>
@@ -180,12 +180,13 @@
 
 <div class="row">
     <!-- BEGIN PRODUCTS -->
-    <div class="col-md-4 col-sm-6">
+    <div class="col-md-4 col-sm-6 center">
     
         <!-- PRODUCT CONTAINER, identified by the class "sc-product-item"  -->
         <div class="sc-product-item">
             <!-- PRODUCT IMAGE, identified by data-name="product_image"  -->
-            <img data-name="product_image" src="http://placehold.it/250x150/2aabd2/ffffff?text=Product+1" alt="...">
+            
+            <!--<img data-name="product_image" src="http://placehold.it/250x150/2aabd2/ffffff?text=Product+1" alt="...">-->
             
             <!-- PRODUCT NAME, identified by data-name="product_name" or can be an element with name="product_name"  -->
             <h4 data-name="product_name">Product 1</h4>
@@ -198,22 +199,43 @@
             <input name="product_id" value="12" type="hidden" />
             
             <!-- ADD TO CART BUTTON, identified by class="sc-add-to-cart"  -->
-            <button class="sc-add-to-cart btn btn-success">Add to cart</button>
+            <button class="sc-add-to-cart btn blue lighten-1 btn-success">Add to cart</button>
+            <br><br>
         </div>
         
     </div>
-    <div class="col-md-4 col-sm-6">
+    <div class="col-md-4 col-sm-6 center">
 
         <!-- PRODUCT CONTAINER 2 -->
         <div class="sc-product-item">
-            <img data-name="product_image" src="http://placehold.it/250x150/2aabd2/ffffff?text=Product+2" alt="...">
+            
+            <!--<img data-name="product_image" src="http://placehold.it/250x150/2aabd2/ffffff?text=Product+2" alt="...">-->
 
             <h4 data-name="product_name">Product 2</h4>
             <p data-name="product_desc">Product details</p>
 
             <input name="product_price" value="320.75" type="hidden" />
             <input name="product_id" value="14" type="hidden" />
-            <button class="sc-add-to-cart btn btn-success">Add to cart</button>
+            <button class="sc-add-to-cart btn blue lighten-1  btn-success">Add to cart</button>
+            <br><br>
+        </div>
+ 
+    </div>
+
+        <div class="col-md-4 col-sm-6 center">
+
+        <!-- PRODUCT CONTAINER 2 -->
+        <div class="sc-product-item">
+            
+            <!--<img data-name="product_image" src="http://placehold.it/250x150/2aabd2/ffffff?text=Product+3" alt="...">-->
+
+            <h4 data-name="product_name">Product 3</h4>
+            <p data-name="product_desc">Product details</p>
+
+            <input name="product_price" value="320.75" type="hidden" />
+            <input name="product_id" value="14" type="hidden" />
+            <button class="sc-add-to-cart btn blue lighten-1   btn-success">Add to cart</button>
+            <br><br>
         </div>
  
     </div>
@@ -223,7 +245,7 @@
 <form action="results.php" method="POST"> 
     <!-- SmartCart element -->
     <div id="smartcart"></div>
-</form>
+
 
 <script type="text/javascript">
 $(document).ready(function(){
@@ -233,16 +255,18 @@ $(document).ready(function(){
 
 <form action="https://www.paypal.com/cgi-bin/webscr" method="POST"> 
     <!-- SmartCart element -->
-    <div id="smartcart"></div>
+   
     
     <!-- Paypal required info, Please update based on your details -->
     <input name="business" value="YOUR-PAYPAL-EMAIL-HERE" type="hidden">            
-    <input name="currency_code" value="USD" type="hidden">
+    <input name="currency_code" value="GBP" type="hidden">
     <input name="return" value="http://www.yourdomain.com/yoursuccessurl" type="hidden">            
     <input name="cancel_return" value="http://www.yourdomain.com/yourcancelurl" type="hidden">
     
     <input name="cmd" value="_cart" type="hidden">    
     <input name="upload" value="1" type="hidden">            
+</form>
+
 </form>
 
 <script type="text/javascript">
