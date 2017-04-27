@@ -256,7 +256,7 @@ $(window).on('load', function(){
 
 $(window).click('#remove', function(){
 
-addRef.child(key).remove().then(function() {
+addRef.remove().then(function() {
     location.reload();
 });
 
