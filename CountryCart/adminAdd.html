@@ -167,12 +167,7 @@
           </tr>
         </thead>
         <tbody  id="table">
-          <tr>
-            <!-- This is empty for now, but it will be filled out by an event handler in application.js with the most recent recommendation data from Firebase. -->
-            <td id="itemName"></td>
-            <td id="itemCat"></td>
-            <td id="itemPrice"></td>
-          </tr>
+          
         </tbody>
       </table>
 
@@ -212,7 +207,7 @@ var list = document.getElementById("table");
 // update the table with its values. This is called every time the child_added
 // event is triggered on the recommendations Firebase reference, which means
 // that this will update EVEN IF you don't refresh the page. Magic.
-addRef.on('child_added', function(childSnapshot) {
+addRef.on('child_added', snap => {
   // Get the recommendation data from the most recent snapshot of data
   // added to the recommendations list in Firebase
 
@@ -223,17 +218,28 @@ addRef.on('child_added', function(childSnapshot) {
   tdCat.setAttribute("id", "presenter");
   var tdPrice = document.createElement('td');
   tdPrice.setAttribute("id", "link");
+  var tdRemove = document.createElement('td');
+  var btnRemove = document.createElement('a');
+  btnRemove.setAttribute("id", "itemRemove");
+  btnRemove.setAttribute("class", "material-icons right");
+  btnRemove.setAttribute("href","#remove");
   
-  tdName.innerText = childSnapshot.val().name;
-  tdCat.innerText = childSnapshot.val().category;
-  tdPrice.innerText = childSnapshot.val().price;
+  
+  tdName.innerText = snap.val().name;
+  tdCat.innerText = snap.val().category;
+  tdPrice.innerText = snap.val().price;
+  btnRemove.innerHTML = "delete";
 
   table.appendChild(tr);
   tr.appendChild(tdName);
   tr.appendChild(tdCat);
   tr.appendChild(tdPrice);
+  tr.appendChild(tdRemove);
+  tdRemove.appendChild(btnRemove);
+
 
 });
+
 
 // When the window is fully loaded, call this function.
 // Note: because we are attaching an event listener to a particular HTML element
@@ -247,6 +253,16 @@ $(window).on('load', function(){
   $("#addItemForm").submit(submitProduct);
 
 });
+
+$(window).click('#remove', function(){
+
+addRef.child(key).remove().then(function() {
+    location.reload();
+});
+
+});
+
+
 
 
         </script>
