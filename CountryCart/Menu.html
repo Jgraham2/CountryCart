@@ -12,7 +12,7 @@
         
     </script>
     <script src="js/materialize.js"></script>
-    <script type="text/javascript" src="js/jquery.smartCart.min.js"></script>
+    <script type="text/javascript" src="js/jquery.smartCart.js"></script>
     <script src="js/init.js"></script>
     <!-- CSS  -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
@@ -178,85 +178,70 @@
         <br>
             <br><br>
 
-<div class="row">
-    <!-- BEGIN PRODUCTS -->
-    <div class="col-md-4 col-sm-6 center">
-    
-        <!-- PRODUCT CONTAINER, identified by the class "sc-product-item"  -->
-        <div class="sc-product-item">
-            <!-- PRODUCT IMAGE, identified by data-name="product_image"  -->
-            
-            <!--<img data-name="product_image" src="http://placehold.it/250x150/2aabd2/ffffff?text=Product+1" alt="...">-->
-            
-            <!-- PRODUCT NAME, identified by data-name="product_name" or can be an element with name="product_name"  -->
-            <h4 data-name="product_name">Product 1</h4>
-            <!-- PRODUCT DESCRIPTION, identified by data-name="product_desc" or can be an element with name="product_desc"  -->
-            <p data-name="product_desc">Product details</p>
+<div id="productRow" class="row">
 
-            <!-- PRODUCT PRICE, identified by name="product_price" or can be an element with data-name="product_price"  -->
-            <input name="product_price" value="2990.50" type="hidden" />
-            <!-- PRODUCT ID, identified by name="product_id" or can be an element with data-name="product_id"  -->
-            <input name="product_id" value="12" type="hidden" />
-            
-            <!-- ADD TO CART BUTTON, identified by class="sc-add-to-cart"  -->
-            <button class="sc-add-to-cart btn blue lighten-1 btn-success">Add to cart</button>
-            <br><br>
-        </div>
-        
-    </div>
-    <div class="col-md-4 col-sm-6 center">
-
-        <!-- PRODUCT CONTAINER 2 -->
-        <div class="sc-product-item">
-            
-            <!--<img data-name="product_image" src="http://placehold.it/250x150/2aabd2/ffffff?text=Product+2" alt="...">-->
-
-            <h4 data-name="product_name">Product 2</h4>
-            <p data-name="product_desc">Product details</p>
-
-            <input name="product_price" value="320.75" type="hidden" />
-            <input name="product_id" value="14" type="hidden" />
-            <button class="sc-add-to-cart btn blue lighten-1  btn-success">Add to cart</button>
-            <br><br>
-        </div>
- 
-    </div>
-
-        <div class="col-md-4 col-sm-6 center">
-
-        <!-- PRODUCT CONTAINER 2 -->
-        <div class="sc-product-item">
-            
-            <!--<img data-name="product_image" src="http://placehold.it/250x150/2aabd2/ffffff?text=Product+3" alt="...">-->
-
-            <h4 data-name="product_name">Product 3</h4>
-            <p data-name="product_desc">Product details</p>
-
-            <input name="product_price" value="320.75" type="hidden" />
-            <input name="product_id" value="14" type="hidden" />
-            <button class="sc-add-to-cart btn blue lighten-1   btn-success">Add to cart</button>
-            <br><br>
-        </div>
- 
-    </div>
-    <!-- END PRODUCTS -->
 </div>
+
+<script>    
+      
+var productRef = firebase.database().ref('shoplist/company/Farmco/menu');
+
+productRef.on('child_added', snap => {
+
+  var row = document.getElementById("productRow");
+  var divOut = document.createElement('div');
+  divOut.setAttribute("class", "col-md-4 col-sm-6 center");
+  var divProduct = document.createElement('div');
+  divProduct.setAttribute("class", "sc-product-item");
+  var hName = document.createElement('h4');
+  hName.setAttribute("data-name", "product_name");
+  var hCat = document.createElement('h5');
+  hCat.setAttribute("data-name", "product_desc");
+  var pPrice = document.createElement('p');
+  pPrice.setAttribute("data-name", "product_price");
+  var inPrice = document.createElement('input');
+  inPrice.setAttribute("name", "product_price");
+  inPrice.setAttribute("value", snap.val().price);
+  inPrice.setAttribute("type", "hidden");
+  var inId = document.createElement('input');
+  inId.setAttribute("name", "product_id");
+  inId.setAttribute("value", "1");
+  inId.setAttribute("type", "hidden");
+  var btnAdd = document.createElement('button');
+  btnAdd.setAttribute("class", "sc-add-to-cart btn blue lighten-1  btn-success");
+  var br1= document.createElement('br');
+  var br2 = document.createElement('br');
+
+  
+  hName.innerText = snap.val().name;
+  hCat.innerText = snap.val().category;
+  pPrice.innerText = "£" + snap.val().price;
+  btnAdd.innerHTML = "Add To Cart";
+
+  row.appendChild(divOut);
+  divOut.appendChild(divProduct);
+  divProduct.appendChild(hName);
+  divProduct.appendChild(hCat);
+  divProduct.appendChild(pPrice);
+  divProduct.appendChild(inPrice);
+  divProduct.appendChild(inId);
+  divProduct.appendChild(btnAdd);
+  divProduct.appendChild(br1);
+  divProduct.appendChild(br2);
+
+
+});
+
+</script>
 
 <form action="results.php" method="POST"> 
     <!-- SmartCart element -->
     <div id="smartcart"></div>
+</form>
 
-
-<script type="text/javascript">
-$(document).ready(function(){
-  $('#smartcart').smartCart();
-});
-</script>
 
 <form action="https://www.paypal.com/cgi-bin/webscr" method="POST"> 
     <!-- SmartCart element -->
-   
-    
     <!-- Paypal required info, Please update based on your details -->
     <input name="business" value="YOUR-PAYPAL-EMAIL-HERE" type="hidden">            
     <input name="currency_code" value="GBP" type="hidden">
@@ -267,9 +252,8 @@ $(document).ready(function(){
     <input name="upload" value="1" type="hidden">            
 </form>
 
-</form>
-
 <script type="text/javascript">
+$(document).ready(function(){
     $('#smartcart').smartCart({
                                 submitSettings: {
                                     submitType: 'paypal' // form, paypal, ajax
@@ -278,12 +262,11 @@ $(document).ready(function(){
                                     checkoutButtonStyle: 'paypal' // default, paypal, image
                                 }
                             });
+    });
 
 </script>
 
 <br><br>
-
-
 
 <!--<div id="set" class="col c6 m4 l6 container center"> 
             <h4 id="pageTitle"></h4>

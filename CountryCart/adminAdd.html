@@ -220,15 +220,17 @@ addRef.on('child_added', snap => {
   tdPrice.setAttribute("id", "link");
   var tdRemove = document.createElement('td');
   var btnRemove = document.createElement('a');
+  var btnDel = document.createElement('i');
   btnRemove.setAttribute("id", "itemRemove");
-  btnRemove.setAttribute("class", "material-icons right");
-  btnRemove.setAttribute("href","#remove");
+  btnRemove.setAttribute("class", "remover btn right");
+  btnRemove.setAttribute("onclick", "removeThis();");
+  btnDel.setAttribute("class", "material-icons");
   
   
   tdName.innerText = snap.val().name;
   tdCat.innerText = snap.val().category;
   tdPrice.innerText = snap.val().price;
-  btnRemove.innerHTML = "delete";
+  btnDel.innerHTML = "delete";
 
   table.appendChild(tr);
   tr.appendChild(tdName);
@@ -236,10 +238,10 @@ addRef.on('child_added', snap => {
   tr.appendChild(tdPrice);
   tr.appendChild(tdRemove);
   tdRemove.appendChild(btnRemove);
+  btnRemove.appendChild(btnDel);
 
 
 });
-
 
 // When the window is fully loaded, call this function.
 // Note: because we are attaching an event listener to a particular HTML element
@@ -254,13 +256,13 @@ $(window).on('load', function(){
 
 });
 
-$(window).click('#remove', function(){
 
-addRef.remove().then(function() {
-    location.reload();
-});
+function removeThis() {
+addRef.remove();
+location.reload();           
+}
 
-});
+
 
 /*$(window).click('#remove', function(){
 
