@@ -182,27 +182,14 @@
 
 </div>
 
-<form action="https://www.paypal.com/cgi-bin/webscr" method="POST"> 
-    <!-- SmartCart element -->
-    <div id="smartcart"></div>
-
-    <input name="business" value="YOUR-PAYPAL-EMAIL-HERE" type="hidden">            
-    <input name="currency_code" value="GBP" type="hidden">
-    <input name="return" value="http://www.yourdomain.com/yoursuccessurl" type="hidden">            
-    <input name="cancel_return" value="http://www.yourdomain.com/yourcancelurl" type="hidden">
-    
-    <input name="cmd" value="_cart" type="hidden">    
-    <input name="upload" value="1" type="hidden">            
-</form>
-
 <script type="text/javascript">    
-      
-var productRef = firebase.database().ref('shoplist/company/Farmco/menu');
-
-productRef.on('child_added', snap => {
 
   var row = document.getElementById("productRow");
-  var divOut = document.createElement('div');
+
+
+  var productRef = firebase.database().ref('shoplist/company/Farmco/menu');
+
+    var divOut = document.createElement('div');
   divOut.setAttribute("class", "col-md-4 col-sm-6 center");
   var divProduct = document.createElement('div');
   divProduct.setAttribute("class", "sc-product-item");
@@ -213,22 +200,16 @@ productRef.on('child_added', snap => {
   var pPrice = document.createElement('p');
   var inPrice = document.createElement('input');
   inPrice.setAttribute("name", "product_price");
-  inPrice.setAttribute("value", snap.val().price);
+  inPrice.setAttribute("value", "1");
   inPrice.setAttribute("type", "hidden");
   var inId = document.createElement('input');
   inId.setAttribute("name", "product_id");
-  inId.setAttribute("value", snap.key);
+  inId.setAttribute("value", "1");
   inId.setAttribute("type", "hidden");
   var btnAdd = document.createElement('button');
   btnAdd.setAttribute("class", "sc-add-to-cart btn blue lighten-1  btn-success");
   var br1= document.createElement('br');
   var br2 = document.createElement('br');
-
-  
-  hName.innerText = snap.val().name;
-  hCat.innerText = snap.val().category;
-  pPrice.innerText = "£" + snap.val().price;
-  btnAdd.innerHTML = "Add To Cart";
 
   row.appendChild(divOut);
   divOut.appendChild(divProduct);
@@ -240,14 +221,49 @@ productRef.on('child_added', snap => {
   divProduct.appendChild(btnAdd);
   divProduct.appendChild(br1);
   divProduct.appendChild(br2);
-
-
+  
+  productRef.on('child_added', function(snapshot) {
+  
+  hName.innerText = snapshot.val().name;
+  hCat.innerText = snapshot.val().category;
+  inPrice.setAttribute("value", snapshot.val().price);
+  inId.setAttribute("value", snapshot.key);
+  pPrice.innerText = "£" + snapshot.val().price;
+  btnAdd.innerHTML = "Add To Cart";
 });
 
 </script>
 
+
+
+<form action="results.php" method="POST"> 
+    <!-- SmartCart element -->
+    <div id="smartcart"></div>
+
+
 <script type="text/javascript">
 $(document).ready(function(){
+  $('#smartcart').smartCart();
+});
+</script>
+
+<form action="https://www.paypal.com/cgi-bin/webscr" method="POST"> 
+    <!-- SmartCart element -->
+   
+    
+    <!-- Paypal required info, Please update based on your details -->
+    <input name="business" value="YOUR-PAYPAL-EMAIL-HERE" type="hidden">            
+    <input name="currency_code" value="GBP" type="hidden">
+    <input name="return" value="http://www.yourdomain.com/yoursuccessurl" type="hidden">            
+    <input name="cancel_return" value="http://www.yourdomain.com/yourcancelurl" type="hidden">
+    
+    <input name="cmd" value="_cart" type="hidden">    
+    <input name="upload" value="1" type="hidden">            
+</form>
+
+</form>
+
+<script type="text/javascript">
     $('#smartcart').smartCart({
                                 submitSettings: {
                                     submitType: 'paypal' // form, paypal, ajax
@@ -256,7 +272,6 @@ $(document).ready(function(){
                                     checkoutButtonStyle: 'paypal' // default, paypal, image
                                 }
                             });
-    });
 
 </script>
 
