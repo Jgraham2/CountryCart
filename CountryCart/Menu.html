@@ -182,7 +182,20 @@
 
 </div>
 
-<script>    
+<form action="https://www.paypal.com/cgi-bin/webscr" method="POST"> 
+    <!-- SmartCart element -->
+    <div id="smartcart"></div>
+
+    <input name="business" value="YOUR-PAYPAL-EMAIL-HERE" type="hidden">            
+    <input name="currency_code" value="GBP" type="hidden">
+    <input name="return" value="http://www.yourdomain.com/yoursuccessurl" type="hidden">            
+    <input name="cancel_return" value="http://www.yourdomain.com/yourcancelurl" type="hidden">
+    
+    <input name="cmd" value="_cart" type="hidden">    
+    <input name="upload" value="1" type="hidden">            
+</form>
+
+<script type="text/javascript">    
       
 var productRef = firebase.database().ref('shoplist/company/Farmco/menu');
 
@@ -198,14 +211,13 @@ productRef.on('child_added', snap => {
   var hCat = document.createElement('h5');
   hCat.setAttribute("data-name", "product_desc");
   var pPrice = document.createElement('p');
-  pPrice.setAttribute("data-name", "product_price");
   var inPrice = document.createElement('input');
   inPrice.setAttribute("name", "product_price");
   inPrice.setAttribute("value", snap.val().price);
   inPrice.setAttribute("type", "hidden");
   var inId = document.createElement('input');
   inId.setAttribute("name", "product_id");
-  inId.setAttribute("value", "1");
+  inId.setAttribute("value", snap.key);
   inId.setAttribute("type", "hidden");
   var btnAdd = document.createElement('button');
   btnAdd.setAttribute("class", "sc-add-to-cart btn blue lighten-1  btn-success");
@@ -233,24 +245,6 @@ productRef.on('child_added', snap => {
 });
 
 </script>
-
-<form action="results.php" method="POST"> 
-    <!-- SmartCart element -->
-    <div id="smartcart"></div>
-</form>
-
-
-<form action="https://www.paypal.com/cgi-bin/webscr" method="POST"> 
-    <!-- SmartCart element -->
-    <!-- Paypal required info, Please update based on your details -->
-    <input name="business" value="YOUR-PAYPAL-EMAIL-HERE" type="hidden">            
-    <input name="currency_code" value="GBP" type="hidden">
-    <input name="return" value="http://www.yourdomain.com/yoursuccessurl" type="hidden">            
-    <input name="cancel_return" value="http://www.yourdomain.com/yourcancelurl" type="hidden">
-    
-    <input name="cmd" value="_cart" type="hidden">    
-    <input name="upload" value="1" type="hidden">            
-</form>
 
 <script type="text/javascript">
 $(document).ready(function(){
