@@ -11,7 +11,7 @@
   <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 </head>
 <body>
-  <nav class="deep-purple lighten-1" role="navigation">
+  <nav class="red lighten-1" role="navigation">
     <div class="nav-wrapper container" >       
     <img class="logo center hide-on-med-and-down" src="images/whitearrows.png" height="42" width="42" align="center" alt="logo">
         <a id="logo-container" class="brand-logo"></a> 
@@ -37,9 +37,8 @@
     
   <div class="section no-pad-bot" id="index-banner">
    
-    <center>
-        <h4 class="">Hi Again,</h4>
-        <h5 class="">Would you like to Sign In?</h5>
+    <center><br>
+        <h4 class="">Company Sign In</h4>
 <script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>
   <script>
       // Initialize Firebase
@@ -57,7 +56,7 @@
     <script type="text/javascript">
       // FirebaseUI config.
       var uiConfig = {
-        signInSuccessUrl: 'supplierView.html',
+        signInSuccessUrl: 'adminAdd.html',
         signInOptions: [
           // Leave the lines as is for the providers you want to offer your users.
           firebase.auth.GoogleAuthProvider.PROVIDER_ID,
@@ -73,11 +72,10 @@
       ui.start('#firebaseui-auth-container', uiConfig);
     </script>
          <br><br>
-         <br><br>
+         <br>
         <div id="firebaseui-auth-container"></div>
         <div class="container">
               <br>
-              <a href="adminlogin.html">Company Sign In</a>
  <!--<div class="container  z-depth-4">
 	<ul class="tabs red lighten-1">
 		<li class="tab col s3"><a class="white-text active" href="#login">login</a></li>
