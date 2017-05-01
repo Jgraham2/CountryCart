@@ -1,0 +1,273 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta charset="utf-8">
+  <title>CountryCart</title>
+
+    <!--  Scripts-->
+        <!-- Load the Firebase library before loading the body. -->
+    <script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
+
+    <!-- Load the jQuery library, which we'll use to manipulate HTML elements with Javascript. -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  
+    <script src="js/materialize.js"></script>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+<body>
+  <nav class="red lighten-1" role="navigation">
+    <div class="nav-wrapper container" >       
+    <img class="logo center hide-on-med-and-down" src="images/whitearrows.png" height="42" width="42" align="center" alt="logo">
+        <a id="logo-container" class="brand-logo"></a> 
+<!-- Icon made by Baianat from www.flaticon.com  -->
+      <ul class="right hide-on-med-and-down">
+        <li><a href="#"></a></li>
+          <li class="tab col s3"><a id="sign-in" onclick="signout()"></a></li>
+      </ul>
+
+      <ul id="nav-mobile" class="side-nav" >
+      <div class="circle center">
+        <img src="images/CC-Logo.png" height="85" width="85" align="center" >
+        <img src="images/cclogotxt.png"  height="80" width="100" align="center">
+      </div>
+      <li><div class="divider"></div></li>
+          <li class="tab col s3"><a id="sign-in-mob" onclick="signout()"></a></li>
+          <li><div class="divider"></div></li>
+      <li><a href="#!">First Sidebar Link</a></li>
+      <li><a href="#!">Second Sidebar Link</a></li>
+      <li class="no-padding">
+        <ul class="collapsible collapsible-accordion">
+          <li>
+            <a class="collapsible-header">Dropdown<i class="material-icons">arrow_drop_down</i></a>
+            <div class="collapsible-body">
+              <ul>
+                <li><a href="#!">First</a></li>
+                <li><a href="#!">Second</a></li>
+                <li><a href="#!">Third</a></li>
+                <li><a href="#!">Fourth</a></li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </li>
+      </ul>
+        <a href="#" data-activates="nav-mobile" class="button-collapse left"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+  <div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+      
+        <script type="text/javascript">
+      initApp = function() {
+        firebase.auth().onAuthStateChanged(function(user) {
+          if (user) {
+            // User is signed in.
+              var strMessage1 = document.getElementById("message") ;
+              strMessage1.innerHTML = '<h5> Hello, ' + user.displayName + '.</h5>'
+            var displayName = user.displayName;
+            var email = user.email;
+            var emailVerified = user.emailVerified;
+            var photoURL = user.photoURL;
+            var uid = user.uid;
+            var providerData = user.providerData;
+            user.getToken().then(function(accessToken) {
+              document.getElementById('sign-in-status').textContent = 'Signed in as an Admin.' ;
+              document.getElementById('sign-in').textContent = 'Sign out';
+              document.getElementById('sign-in-mob').href = "login.html"
+              document.getElementById('sign-in').href = "login.html"
+              document.getElementById('sign-in-mob').textContent = 'Sign out';
+/*              document.getElementById('account-details').textContent = JSON.stringify({
+                displayName: displayName,
+                email: email,
+                emailVerified: emailVerified,
+                photoURL: photoURL,
+                uid: uid,
+                accessToken: accessToken,
+                providerData: providerData
+              }, null, '  ');*/
+            });
+          } else {
+            // User is signed out.
+            document.getElementById('sign-in-status').textContent = 'viewing as a Admin.';
+            document.getElementById('sign-in').textContent = 'Sign in';
+            document.getElementById('sign-in-mob').href = "login.html"
+            document.getElementById('sign-in-mob').textContent = 'Sign out';
+            document.getElementById('sign-in').href = "login.html"
+            //document.getElementById('account-details').textContent = 'null';
+          }
+        }, function(error) {
+          console.log(error);
+        });
+      };
+      window.addEventListener('load', function() {
+        initApp()
+      });
+    
+        signout = function() {
+            firebase.auth().signOut().then(function() {
+            console.log('Signed Out');
+            }, function(error) {
+            console.error('Sign Out Error', error);
+            });
+        };
+    </script>
+
+    
+    <h5 id="message">Welcome, </h5>
+        <div>
+            <p class="left">You are <a id="sign-in-status"></a> </p>
+
+        </div>
+        <br> <br>
+      <div class="col c6 m4 l6 container">
+
+      <h3>Add A Product</h3>
+
+      <form id="addItemForm">
+        <div class="form-group">
+          <label for="productName">Product</label>
+          <input type="text" class="form-control" id="productName" placeholder="Name of Product">
+        </div>
+
+        <div class="form-group">
+          <label for="productCategory">Category</label>
+          <input type="text" class="form-control" id="productCategory" placeholder="e.g Fish, Bread or Magazines.">
+        </div>
+
+        <div class="form-group">
+          <label for="productPrice">Price (£)</label>
+          <input type="number" min="0.01" step="0.01" max="2500"  class="form-control" id="productPrice" placeholder="0.00">
+        </div>
+
+        <!-- When you click this button, trigger the submit event on this form. -->
+        <button type="submit" class="btn purple lighten-1 btn-default">Submit</button>
+      </form>
+      <br>
+    </div>
+    <br>
+
+    <h3>Your Products</h3>
+
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Category</th>
+            <th>Price (£)</th>
+          </tr>
+        </thead>
+        <tbody  id="table">
+          <tr>
+            <!-- This is empty for now, but it will be filled out by an event handler in application.js with the most recent recommendation data from Firebase. -->
+            <td id="itemName"></td>
+            <td id="itemCat"></td>
+            <td id="itemPrice"></td>
+          </tr>
+        </tbody>
+      </table>
+
+</div>
+
+        <script>
+  // Initialize Firebase
+  var config = {
+        apiKey: "AIzaSyBhoPjNeZvo62IrIfi7GHARENckSZaoXGk",
+        authDomain: "countrycart-b276a.firebaseapp.com",
+        databaseURL: "https://countrycart-b276a.firebaseio.com",
+        storageBucket: "countrycart-b276a.appspot.com",
+        messagingSenderId: "717738134028"
+      };
+
+      firebase.initializeApp(config);
+      
+      var addRef = firebase.database().ref('shoplist/company/Farmco/menu');
+
+        // Save a new recommendation to the database, using the input in the form
+      var submitProduct = function () {
+
+  // Get input values from each of the form elements
+  var name = $("#productName").val();
+  var category = $("#productCategory").val();
+  var price = $("#productPrice").val();
+
+  // Push a new recommendation to the database using those values
+  addRef.push({
+    "name": name,
+    "category": category,
+    "price": price
+  });
+};
+var list = document.getElementById("table");
+// Get the single most recent recommendation from the database and
+// update the table with its values. This is called every time the child_added
+// event is triggered on the recommendations Firebase reference, which means
+// that this will update EVEN IF you don't refresh the page. Magic.
+addRef.on('child_added', function(childSnapshot) {
+  // Get the recommendation data from the most recent snapshot of data
+  // added to the recommendations list in Firebase
+
+  var tr = document.createElement('tr');
+  var tdName = document.createElement('td');
+  tdName.setAttribute("id", "title");
+  var tdCat = document.createElement('td');
+  tdCat.setAttribute("id", "presenter");
+  var tdPrice = document.createElement('td');
+  tdPrice.setAttribute("id", "link");
+  
+  tdName.innerText = childSnapshot.val().name;
+  tdCat.innerText = childSnapshot.val().category;
+  tdPrice.innerText = childSnapshot.val().price;
+
+  table.appendChild(tr);
+  tr.appendChild(tdName);
+  tr.appendChild(tdCat);
+  tr.appendChild(tdPrice);
+
+});
+
+// When the window is fully loaded, call this function.
+// Note: because we are attaching an event listener to a particular HTML element
+// in this function, we can't do that until the HTML element in question has
+// been loaded. Otherwise, we're attaching our listener to nothing, and no code
+// will run when the submit button is clicked.
+$(window).on('load', function(){
+
+  // Find the HTML element with the id recommendationForm, and when the submit
+  // event is triggered on that element, call submitRecommendation.
+  $("#addItemForm").submit(submitProduct);
+
+});
+
+
+        </script>
+
+      </div>
+
+<br>
+
+    <br><br>
+
+    <div class="section">
+
+    </div>
+
+        <div class="row center">
+            <img src="images/CC-Logo.png" height="40" width="120">
+            </div>
+  <footer class="page-footer light-green darken-1">
+    <div class="footer-copyright">
+      <div class="container">
+    CountryCart Copyright © 2017. <br>Style by Materialize.
+      </div>
+    </div>
+  </footer>
+
+
+  </body>
+</html>

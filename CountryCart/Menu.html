@@ -5,18 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta charset="utf-8">
     <title>CountryCart</title>
-    <!--  Scripts-->
+    
+</head>
+<!--  Scripts-->
     <script src="https://code.jquery.com/jquery-3.2.0.min.js">
         
     </script>
     <script src="js/materialize.js"></script>
-
+    <script type="text/javascript" src="js/jquery.smartCart.min.js"></script>
     <script src="js/init.js"></script>
     <!-- CSS  -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/smart_cart.min.css" rel="stylesheet" type="text/css" /> 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
     <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
-</head>
 <script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>
 <script>
       // Initialize Firebase
@@ -92,8 +95,6 @@
         firebase.auth().onAuthStateChanged(function(user) {
           if (user) {
             // User is signed in.
-            var strMessage1 = document.getElementById("message") ;
-            strMessage1.innerHTML = '<h5> Hi, ' + user.displayName + '.</h5>'
             var displayName = user.displayName;
             var email = user.email;
             var emailVerified = user.emailVerified;
@@ -167,7 +168,8 @@
             </ul>
             <a href="#" data-activates="slide-out" class="button-collapse right"><i class="material-icons">dashboard</i></a>
 
-<br>
+<br><br>
+
         <div>
             <p class="left">You are <a id="sign-in-status"></a> </p>
 
@@ -175,7 +177,226 @@
         </div>
         <br>
             <br><br>
-<div id="set" class="col c6 m4 l6 container center"> 
+
+<div class="row">
+    <!-- BEGIN PRODUCTS -->
+    <div class="col-md-4 col-sm-6 center">
+    
+        <!-- PRODUCT CONTAINER, identified by the class "sc-product-item"  -->
+        <div class="sc-product-item">
+            <!-- PRODUCT IMAGE, identified by data-name="product_image"  -->
+            
+            <!--<img data-name="product_image" src="http://placehold.it/250x150/2aabd2/ffffff?text=Product+1" alt="...">-->
+            
+            <!-- PRODUCT NAME, identified by data-name="product_name" or can be an element with name="product_name"  -->
+            <h4 data-name="product_name">Salmon</h4>
+            <!-- PRODUCT DESCRIPTION, identified by data-name="product_desc" or can be an element with name="product_desc"  -->
+            <p data-name="product_desc">Fish</p>
+            <p>£4.99</p>
+
+            <!-- PRODUCT PRICE, identified by name="product_price" or can be an element with data-name="product_price"  -->
+            <input name="product_price" value="4.99" type="hidden" />
+            <!-- PRODUCT ID, identified by name="product_id" or can be an element with data-name="product_id"  -->
+            <input name="product_id" value="12" type="hidden" />
+            
+            <!-- ADD TO CART BUTTON, identified by class="sc-add-to-cart"  -->
+            <button class="sc-add-to-cart btn blue lighten-1 btn-success">Add to cart</button>
+            <br><br>
+        </div>
+        
+    </div>
+    <div class="col-md-4 col-sm-6 center">
+
+        <!-- PRODUCT CONTAINER 2 -->
+        <div class="sc-product-item">
+            
+            <!--<img data-name="product_image" src="http://placehold.it/250x150/2aabd2/ffffff?text=Product+2" alt="...">-->
+
+            <h4 data-name="product_name">Steak</h4>
+            <p data-name="product_desc">Meat</p>
+            <p>£8.99</p>
+            <input name="product_price" value="8.99" type="hidden" />
+            <input name="product_id" value="14" type="hidden" />
+            <button class="sc-add-to-cart btn blue lighten-1  btn-success">Add to cart</button>
+            <br><br>
+        </div>
+ 
+    </div>
+
+        <div class="col-md-4 col-sm-6 center">
+
+        <!-- PRODUCT CONTAINER 2 -->
+        <div class="sc-product-item">
+            
+            <!--<img data-name="product_image" src="http://placehold.it/250x150/2aabd2/ffffff?text=Product+3" alt="...">-->
+
+            <h4 data-name="product_name">Soda</h4>
+            <p data-name="product_desc">Bread</p>
+            <p>£8.99</p>
+            <input name="product_price" value="2.00" type="hidden" />
+            <input name="product_id" value="14" type="hidden" />
+            <button class="sc-add-to-cart btn blue lighten-1   btn-success">Add to cart</button>
+            <br><br>
+        </div>
+ 
+    </div>
+    
+    <div class="col-md-4 col-sm-6 center">
+    
+        <!-- PRODUCT CONTAINER, identified by the class "sc-product-item"  -->
+        <div class="sc-product-item">
+            <!-- PRODUCT IMAGE, identified by data-name="product_image"  -->
+            
+            <!--<img data-name="product_image" src="http://placehold.it/250x150/2aabd2/ffffff?text=Product+1" alt="...">-->
+            
+            <!-- PRODUCT NAME, identified by data-name="product_name" or can be an element with name="product_name"  -->
+            <h4 data-name="product_name">Apples</h4>
+            <!-- PRODUCT DESCRIPTION, identified by data-name="product_desc" or can be an element with name="product_desc"  -->
+            <p data-name="product_desc">Fruit</p>
+            <p>£1.99</p>
+            <!-- PRODUCT PRICE, identified by name="product_price" or can be an element with data-name="product_price"  -->
+            <input name="product_price" value="1.99" type="hidden" />
+            <!-- PRODUCT ID, identified by name="product_id" or can be an element with data-name="product_id"  -->
+            <input name="product_id" value="12" type="hidden" />
+            
+            <!-- ADD TO CART BUTTON, identified by class="sc-add-to-cart"  -->
+            <button class="sc-add-to-cart btn blue lighten-1 btn-success">Add to cart</button>
+            <br><br>
+        </div>
+        
+    </div>
+
+    <div class="col-md-4 col-sm-6 center">
+
+        <!-- PRODUCT CONTAINER 2 -->
+        <div class="sc-product-item">
+            
+            <!--<img data-name="product_image" src="http://placehold.it/250x150/2aabd2/ffffff?text=Product+2" alt="...">-->
+
+            <h4 data-name="product_name">Milk</h4>
+            <p data-name="product_desc">Dairy</p>
+            <p>£1.99</p>
+            <input name="product_price" value="1.99" type="hidden" />
+            <input name="product_id" value="14" type="hidden" />
+            <button class="sc-add-to-cart btn blue lighten-1  btn-success">Add to cart</button>
+            <br><br>
+        </div>
+ 
+    </div>
+
+        <div class="col-md-4 col-sm-6 center">
+
+        <!-- PRODUCT CONTAINER 2 -->
+        <div class="sc-product-item">
+            
+            <!--<img data-name="product_image" src="http://placehold.it/250x150/2aabd2/ffffff?text=Product+3" alt="...">-->
+
+            <h4 data-name="product_name">Cream</h4>
+            <p data-name="product_desc">Dairy</p>
+            <p>£2.00</p>
+            <input name="product_price" value="2.00" type="hidden" />
+            <input name="product_id" value="14" type="hidden" />
+            <button class="sc-add-to-cart btn blue lighten-1   btn-success">Add to cart</button>
+            <br><br>
+        </div>
+ 
+    </div>
+
+    <div class="col-md-4 col-sm-6 center">
+
+        <!-- PRODUCT CONTAINER 2 -->
+        <div class="sc-product-item">
+            
+            <!--<img data-name="product_image" src="http://placehold.it/250x150/2aabd2/ffffff?text=Product+2" alt="...">-->
+
+            <h4 data-name="product_name">Potatoes (1kg)</h4>
+            <p data-name="product_desc">Vegetables</p>
+            <p>£4.99</p>
+            <input name="product_price" value="4.99" type="hidden" />
+            <input name="product_id" value="14" type="hidden" />
+            <button class="sc-add-to-cart btn blue lighten-1  btn-success">Add to cart</button>
+            <br><br>
+        </div>
+ 
+    </div>
+
+        <div class="col-md-4 col-sm-6 center">
+
+        <!-- PRODUCT CONTAINER 2 -->
+        <div class="sc-product-item">
+            
+            <!--<img data-name="product_image" src="http://placehold.it/250x150/2aabd2/ffffff?text=Product+3" alt="...">-->
+
+            <h4 data-name="product_name">Strawberries</h4>
+            <p data-name="product_desc">Fruit</p>
+            <p>£2.50</p>
+            <input name="product_price" value="2.50" type="hidden" />
+            <input name="product_id" value="14" type="hidden" />
+            <button class="sc-add-to-cart btn blue lighten-1   btn-success">Add to cart</button>
+            <br><br>
+        </div>
+ 
+    </div>
+
+    <div class="col-md-4 col-sm-6 center">
+
+        <!-- PRODUCT CONTAINER 2 -->
+        <div class="sc-product-item">
+            
+            <!--<img data-name="product_image" src="http://placehold.it/250x150/2aabd2/ffffff?text=Product+3" alt="...">-->
+
+            <h4 data-name="product_name">Carrots</h4>
+            <p data-name="product_desc">Vegetables</p>
+            <p>£1.50</p>
+            <input name="product_price" value="1.50" type="hidden" />
+            <input name="product_id" value="14" type="hidden" />
+            <button class="sc-add-to-cart btn blue lighten-1   btn-success">Add to cart</button>
+            <br><br>
+        </div>
+ 
+    </div>
+    <!-- END PRODUCTS -->
+
+</div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $('#smartcart').smartCart();
+});
+</script>
+
+<form action="https://www.paypal.com/cgi-bin/webscr" method="POST"> 
+    <!-- SmartCart element -->
+   <div id="smartcart"></div>
+    
+    <!-- Paypal required info, Please update based on your details -->
+    <input name="business" value="CountryCart@gmail.com" type="hidden">            
+    <input name="currency_code" value="GBP" type="hidden">
+    <input name="return" value="" type="hidden">            
+    <input name="cancel_return" value="" type="hidden">
+    
+    <input name="cmd" value="_cart" type="hidden">    
+    <input name="upload" value="1" type="hidden">            
+
+</form>
+
+<script type="text/javascript">
+    $('#smartcart').smartCart({
+                                submitSettings: {
+                                    submitType: 'paypal' // form, paypal, ajax
+                                },
+                                toolbarSettings: {
+                                    checkoutButtonStyle: 'paypal' // default, paypal, image
+                                }
+                            });
+
+</script>
+
+<br><br>
+
+
+
+<!--<div id="set" class="col c6 m4 l6 container center"> 
             <h4 id="pageTitle"></h4>
             <br>
 </div>
@@ -187,6 +408,7 @@
        <ul id="list3" class= "collapsible green lighten-1" data-collapsible="accordion">
    </ul>
 </div>
+
 <script>
 
   $(document).ready(function(){
@@ -838,7 +1060,7 @@ storageRef.child('farmco.png').getDownloadURL().then(function(url) {
     <script>
         paypal.minicart.render();
 
-    </script>
+    </script>-->
 
 
     <br><br>
